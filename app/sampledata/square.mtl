@@ -1,0 +1,12 @@
+# Blender MTL File: 'square.blend'
+# Material Count: 1
+
+newmtl Default_OBJ
+Ns 81.000006
+Ka 1.000000 1.000000 1.000000
+Kd 0.051269 0.745404 0.630757
+Ks 0.450000 0.450000 0.450000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2

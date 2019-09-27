@@ -1,0 +1,12 @@
+# Blender MTL File: 'triangle.blend'
+# Material Count: 1
+
+newmtl defaultMat
+Ns 81.000006
+Ka 1.000000 1.000000 1.000000
+Kd 0.215861 0.215860 0.215861
+Ks 0.427273 0.427273 0.427273
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
