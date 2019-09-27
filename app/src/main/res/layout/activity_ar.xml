@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/arimage_fragment"
-        android:name="com.example.shapesandcolors.AugmentedImageFragment"
+        android:name="com.google.ar.sceneform.ux.ArFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -24,72 +24,39 @@
 
             <ImageView
                 android:id="@+id/imv_circle"
+                android:src="@drawable/circle2"
                 android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/circle" />
-
-            <ImageView
-                android:id="@+id/imv_diamond"
-                android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/diamond" />
+                android:layout_height="100dp" />
 
             <ImageView
                 android:id="@+id/imv_heart"
+                android:src="@drawable/heart2"
                 android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/heart" />
+                android:layout_height="100dp" />
+
             <ImageView
                 android:id="@+id/imv_hexagon"
+                android:src="@drawable/hexagon2"
                 android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/hexagon" />
+                android:layout_height="100dp" />
 
             <ImageView
-                android:id="@+id/imv_octagon"
+                android:id="@+id/imv_circle2"
+                android:src="@drawable/circle2"
                 android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/octagon" />
+                android:layout_height="100dp" />
 
             <ImageView
-                android:id="@+id/imv_oval"
+                android:id="@+id/imv_heart2"
+                android:src="@drawable/heart2"
                 android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/oval" />
+                android:layout_height="100dp" />
 
             <ImageView
-                android:id="@+id/imv_rectangle"
+                android:id="@+id/imv_hexagon2"
+                android:src="@drawable/hexagon2"
                 android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/rectangle" />
-
-            <ImageView
-                android:id="@+id/imv_square"
-                android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/square" />
-
-            <ImageView
-                android:id="@+id/imv_star"
-                android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/star" />
-
-            <ImageView
-                android:id="@+id/imv_triangle"
-                android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/triangle" />
+                android:layout_height="100dp" />
         </LinearLayout>
     </HorizontalScrollView>
 
