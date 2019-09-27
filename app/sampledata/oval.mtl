@@ -1,0 +1,12 @@
+# Blender MTL File: 'oval.blend'
+# Material Count: 1
+
+newmtl default.002
+Ns 78.564058
+Ka 1.000000 1.000000 1.000000
+Kd 0.327778 0.020289 0.434154
+Ks 0.450000 0.450000 0.450000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2

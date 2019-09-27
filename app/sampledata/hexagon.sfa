@@ -1,0 +1,42 @@
+{
+  materials: [
+    {
+      name: 'default.002',
+      parameters: [
+        {
+          baseColor: null,
+        },
+        {
+          baseColorTint: [
+            0.258183,
+            0.059511000000000001,
+            0.0065120000000000004,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.125475,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/hexagon.obj',
+    name: 'hexagon',
+    recenter: 'root',
+  },
+  version: '0.54:2',
+}

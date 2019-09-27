@@ -1,0 +1,12 @@
+# Blender MTL File: 'Circle.blend'
+# Material Count: 1
+
+newmtl default.002
+Ns 137.528915
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.486364 0.486364 0.486364
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
