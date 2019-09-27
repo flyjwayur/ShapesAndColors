@@ -1,0 +1,43 @@
+{
+  materials: [
+    {
+      name: 'default.003',
+      parameters: [
+        {
+          baseColor: null,
+        },
+        {
+          baseColorTint: [
+            0,
+            1,
+            0,
+            1,
+          ],
+        },
+        {
+          metallic: 0,
+        },
+        {
+          roughness: 0.7,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/diamond.obj',
+    name: 'diamond',
+    recenter: 'root',
+    scale: 0.56711100000000003,
+  },
+  version: '0.54:2',
+}

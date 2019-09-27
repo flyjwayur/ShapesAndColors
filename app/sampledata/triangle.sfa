@@ -1,0 +1,42 @@
+{
+  materials: [
+    {
+      name: 'defaultMat',
+      parameters: [
+        {
+          baseColor: null,
+        },
+        {
+          baseColorTint: [
+            0.215861,
+            0.21586,
+            0.215861,
+            1,
+          ],
+        },
+        {
+          metallic: 0,
+        },
+        {
+          roughness: 0.7,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/triangle.obj',
+    name: 'triangle',
+    recenter: 'root',
+  },
+  version: '0.54:2',
+}

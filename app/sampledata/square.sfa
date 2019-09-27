@@ -1,0 +1,42 @@
+{
+  materials: [
+    {
+      name: 'Default_OBJ',
+      parameters: [
+        {
+          baseColor: null,
+        },
+        {
+          baseColorTint: [
+            0.051269000000000002,
+            0.74540399999999996,
+            0.63075700000000001,
+            1,
+          ],
+        },
+        {
+          metallic: 0,
+        },
+        {
+          roughness: 0.7,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/square.obj',
+    name: 'square',
+    recenter: 'root',
+    scale: 0.44827899999999998,
+  },
+  version: '0.54:2',
+}
