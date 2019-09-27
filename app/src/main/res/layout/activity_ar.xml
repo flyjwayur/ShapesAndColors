@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ArActivity">
+
+    <fragment
+        android:id="@+id/arimage_fragment"
+        android:name="com.example.shapesandcolors.AugmentedImageFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/imv_circle"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/circle" />
+
+            <ImageView
+                android:id="@+id/imv_diamond"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/diamond" />
+
+            <ImageView
+                android:id="@+id/imv_heart"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/heart" />
+            <ImageView
+                android:id="@+id/imv_hexagon"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/hexagon" />
+
+            <ImageView
+                android:id="@+id/imv_octagon"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/octagon" />
+
+            <ImageView
+                android:id="@+id/imv_oval"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/oval" />
+
+            <ImageView
+                android:id="@+id/imv_rectangle"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/imv_square"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/square" />
+
+            <ImageView
+                android:id="@+id/imv_star"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/star" />
+
+            <ImageView
+                android:id="@+id/imv_triangle"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:src="@drawable/triangle" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</FrameLayout>

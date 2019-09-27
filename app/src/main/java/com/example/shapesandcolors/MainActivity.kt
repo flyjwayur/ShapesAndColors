@@ -1,25 +1,43 @@
 package com.example.shapesandcolors
 
+import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var fragment: ArFragment
-    private lateinit var modelUri: Uri
-    private lateinit var fitToScanImageView : ImageView
-    private var circleRenderable: ModelRenderable? = null
-    private var heartRenderable: ModelRenderable? = null
-    private var hexagonRenderable: ModelRenderable? = null
-    private var selectedShape:Int = 1
+    private var actList = arrayOf("Ar", "FetchImage", "Play")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        fragment = supportFragmentManager.findFragmentById(R.id.arimage_fragment) as ArFragment
+
+        circle_menu.setMainMenu(Color.parseColor("#CDCDCD"), R.drawable.play, R.drawable.stop)
+            .addSubMenu(Color.parseColor("#25BCFE"), R.drawable.icon_stop)
+            .addSubMenu(Color.parseColor("#6D4C41"), R.drawable.sound)
+            .addSubMenu(Color.parseColor("#1a237e"), R.drawable.sound2)
+            .setOnMenuSelectedListener {
+                when(actList[it]) {
+                    "Ar" -> {
+                        val intent = Intent(this, ArActivity :: class.java)
+                        startActivity(intent)
+                    }
+                    "FetchImage" -> {
+                        val intent = Intent(this, FetchImageActivity :: class.java)
+                        startActivity(intent)
+                    }
+                    "Play" -> {
+                        val intent = Intent(this, PlayActivity :: class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+
     }
 }
