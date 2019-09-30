@@ -15,10 +15,10 @@
           ],
         },
         {
-          metallic: 1,
+          metallic: 0,
         },
         {
-          roughness: 0.15523000000000001,
+          roughness: 0.7,
         },
         {
           opacity: null,
