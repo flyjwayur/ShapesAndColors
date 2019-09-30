@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.net.Uri
+import android.widget.TextView
 import android.widget.Toast
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
@@ -15,7 +16,7 @@ import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.math.Quaternion
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
-
+import com.google.ar.sceneform.rendering.ViewRenderable
 
 
 class ArActivity : AppCompatActivity(), View.OnClickListener {
@@ -172,6 +173,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 circle.setParent(anchorNode)
                 circle.renderable = circleRenderable
                 circle.select()
+
+                addShapeLabel(anchorNode, circle, "Tap to name")
             }
             2 -> {
                 val diamond = TransformableNode(fragment.transformationSystem)
@@ -180,6 +183,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 diamond.setParent(anchorNode)
                 diamond.renderable = diamondRenderable
                 diamond.select()
+
+                addShapeLabel(anchorNode, diamond, "Tap to name")
             }
             3 -> {
                 val heart = TransformableNode(fragment.transformationSystem)
@@ -188,6 +193,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 heart.setParent(anchorNode)
                 heart.renderable = heartRenderable
                 heart.select()
+
+                addShapeLabel(anchorNode, heart, "Tap to name")
             }
             4 -> {
                 val hexagon = TransformableNode(fragment.transformationSystem)
@@ -196,6 +203,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 hexagon.setParent(anchorNode)
                 hexagon.renderable = hexagonRenderable
                 hexagon.select()
+
+                addShapeLabel(anchorNode, hexagon, "Tap to name")
             }
             5 -> {
                 val octagon = TransformableNode(fragment.transformationSystem)
@@ -204,6 +213,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 octagon.setParent(anchorNode)
                 octagon.renderable = octagonRenderable
                 octagon.select()
+
+                addShapeLabel(anchorNode, octagon, "Tap to name")
             }
             6 -> {
                 val oval = TransformableNode(fragment.transformationSystem)
@@ -212,6 +223,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 oval.setParent(anchorNode)
                 oval.renderable = ovalRenderable
                 oval.select()
+
+                addShapeLabel(anchorNode, oval, "Tap to name")
             }
             7 -> {
                 val rectangle = TransformableNode(fragment.transformationSystem)
@@ -220,6 +233,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 rectangle.setParent(anchorNode)
                 rectangle.renderable = rectangleRenderable
                 rectangle.select()
+
+                addShapeLabel(anchorNode, rectangle, "Tap to name")
             }
             8 -> {
                 val square = TransformableNode(fragment.transformationSystem)
@@ -228,6 +243,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 square.setParent(anchorNode)
                 square.renderable = squareRenderable
                 square.select()
+
+                addShapeLabel(anchorNode, square, "Tap to name")
             }
             9 -> {
                 val star = TransformableNode(fragment.transformationSystem)
@@ -236,6 +253,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 star.setParent(anchorNode)
                 star.renderable = starRenderable
                 star.select()
+
+                addShapeLabel(anchorNode, star, "Tap to name")
             }
             10 -> {
                 val triangle = TransformableNode(fragment.transformationSystem)
@@ -245,7 +264,27 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 triangle.setParent(anchorNode)
                 triangle.renderable = triangleRenderable
                 triangle.select()
+
+                addShapeLabel(anchorNode, triangle, "Tap to name")
             }
         }
+    }
+
+    private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, label: String) {
+        ViewRenderable.builder().setView(this, R.layout.label_layout)
+            .build()
+            .thenAccept{ viewRenderable ->
+                val labelView = TransformableNode(fragment.transformationSystem)
+                labelView.localPosition = Vector3(0f, node.localPosition.y+0.7f, 0f)
+                labelView.setParent(anchorNode)
+                labelView.renderable = viewRenderable
+                labelView.select()
+
+                val textLabel = viewRenderable.view as TextView
+                textLabel.text = label // set's the text according to the label parsed
+                textLabel.setOnClickListener{
+                    anchorNode.setParent(null)
+                }
+            }
     }
 }

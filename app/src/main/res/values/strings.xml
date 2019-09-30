@@ -4,4 +4,5 @@
     <string name="colorGame_imageExample">Example image</string>
     <string name="color_check">Check</string>
     <string name="color_coming">Color coming:D</string>
+    <string name="tap_to_name">Tap to name</string>
 </resources>
