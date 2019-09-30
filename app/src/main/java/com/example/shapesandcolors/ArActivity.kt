@@ -16,7 +16,9 @@ import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.math.Quaternion
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
+import com.google.android.material.chip.Chip
 import com.google.ar.sceneform.rendering.ViewRenderable
+import kotlinx.android.synthetic.main.title_layout.*
 
 
 class ArActivity : AppCompatActivity(), View.OnClickListener {
@@ -271,19 +273,22 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, label: String) {
-        ViewRenderable.builder().setView(this, R.layout.label_layout)
+        ViewRenderable.builder().setView(this, R.layout.title_layout)
             .build()
-            .thenAccept{ viewRenderable ->
+            .thenAccept { viewRenderable ->
                 val labelView = TransformableNode(fragment.transformationSystem)
-                labelView.localPosition = Vector3(0f, node.localPosition.y+0.7f, 0f)
+                labelView.localPosition = Vector3(0f, node.localPosition.y + 0.7f, 0f)
                 labelView.setParent(anchorNode)
                 labelView.renderable = viewRenderable
                 labelView.select()
 
-                val textLabel = viewRenderable.view as TextView
-                textLabel.text = label // set's the text according to the label parsed
-                textLabel.setOnClickListener{
+                label_chip.text = label
+                label_chip.setOnClickListener{
                     anchorNode.setParent(null)
+                }
+                label_chip.setOnCloseIconClickListener {
+                    it.visibility = View.INVISIBLE
+                    // Toast.makeText(this, "Close Icon clicked", Toast.LENGTH_SHORT).show()
                 }
             }
     }
