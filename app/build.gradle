@@ -50,15 +50,15 @@ sceneform.asset('sampledata/Circle.obj',
         'sampledata/Circle.sfa',
         'src/main/assets/Circle')
 
-sceneform.asset('sampledata/heart.obj',
-        'default',
-        'sampledata/heart.sfa',
-        'src/main/assets/heart')
-
 sceneform.asset('sampledata/diamond.obj',
         'default',
         'sampledata/diamond.sfa',
         'src/main/assets/diamond')
+
+sceneform.asset('sampledata/heart.obj',
+        'default',
+        'sampledata/heart.sfa',
+        'src/main/assets/heart')
 
 sceneform.asset('sampledata/hexagon.obj',
         'default',
