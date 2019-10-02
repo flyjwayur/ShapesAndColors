@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -35,8 +34,8 @@
         android:layout_height="100dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="40dp"
-        android:paddingLeft="25dp"
         android:backgroundTint="@color/colorPrimary"
+        android:paddingLeft="25dp"
         app:icon="@drawable/play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
@@ -60,8 +59,8 @@
         android:layout_height="100dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
-        android:paddingEnd="50dp"
         android:backgroundTint="@color/colorPrimary"
+        android:paddingEnd="50dp"
         app:icon="@drawable/icon_stop2"
         app:layout_constraintStart_toEndOf="@+id/recordBtn"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
