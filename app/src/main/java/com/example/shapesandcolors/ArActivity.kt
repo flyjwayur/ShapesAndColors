@@ -1,5 +1,6 @@
 package com.example.shapesandcolors
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,10 @@ import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_ar.*
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ViewRenderable
+<<<<<<< HEAD
+=======
+
+>>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
 
 class ArActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -37,10 +42,14 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_ar)
 
         if (savedInstanceState != null) {
+<<<<<<< HEAD
             fragment = getSupportFragmentManager().getFragment(
                 savedInstanceState,
                 "arFragment"
             ) as ArFragment
+=======
+            fragment = getSupportFragmentManager().getFragment(savedInstanceState, "arFragment") as ArFragment
+>>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
         }
 
         arrayView = arrayOf(
@@ -63,7 +72,11 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+<<<<<<< HEAD
     override fun onSaveInstanceState(outState: Bundle) {
+=======
+    override fun onSaveInstanceState(outState : Bundle) {
+>>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
         super.onSaveInstanceState(outState)
         //Save the fragment's instance
         getSupportFragmentManager().putFragment(outState, "arFragment", fragment)
@@ -184,7 +197,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 circle.renderable = circleRenderable
                 circle.select()
 
-                addShapeLabel(anchorNode, circle, "Tap to name")
+                addShapeLabel(anchorNode, circle, "Tap to name", selected)
             }
             2 -> {
                 val diamond = TransformableNode(fragment.transformationSystem)
@@ -194,7 +207,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 diamond.renderable = diamondRenderable
                 diamond.select()
 
-                addShapeLabel(anchorNode, diamond, "Tap to name")
+                addShapeLabel(anchorNode, diamond, "Tap to name", selected)
             }
             3 -> {
                 val heart = TransformableNode(fragment.transformationSystem)
@@ -204,7 +217,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 heart.renderable = heartRenderable
                 heart.select()
 
-                addShapeLabel(anchorNode, heart, "Tap to name")
+                addShapeLabel(anchorNode, heart, "Tap to name", selected)
             }
             4 -> {
                 val hexagon = TransformableNode(fragment.transformationSystem)
@@ -214,7 +227,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 hexagon.renderable = hexagonRenderable
                 hexagon.select()
 
-                addShapeLabel(anchorNode, hexagon, "Tap to name")
+                addShapeLabel(anchorNode, hexagon, "Tap to name", selected)
             }
             5 -> {
                 val octagon = TransformableNode(fragment.transformationSystem)
@@ -224,7 +237,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 octagon.renderable = octagonRenderable
                 octagon.select()
 
-                addShapeLabel(anchorNode, octagon, "Tap to name")
+                addShapeLabel(anchorNode, octagon, "Tap to name", selected)
             }
             6 -> {
                 val oval = TransformableNode(fragment.transformationSystem)
@@ -234,7 +247,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 oval.renderable = ovalRenderable
                 oval.select()
 
-                addShapeLabel(anchorNode, oval, "Tap to name")
+                addShapeLabel(anchorNode, oval, "Tap to name", selected)
             }
             7 -> {
                 val rectangle = TransformableNode(fragment.transformationSystem)
@@ -244,7 +257,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 rectangle.renderable = rectangleRenderable
                 rectangle.select()
 
-                addShapeLabel(anchorNode, rectangle, "Tap to name")
+                addShapeLabel(anchorNode, rectangle, "Tap to name", selected)
             }
             8 -> {
                 val square = TransformableNode(fragment.transformationSystem)
@@ -254,7 +267,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 square.renderable = squareRenderable
                 square.select()
 
-                addShapeLabel(anchorNode, square, "Tap to name")
+                addShapeLabel(anchorNode, square, "Tap to name", selected)
             }
             9 -> {
                 val star = TransformableNode(fragment.transformationSystem)
@@ -264,7 +277,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 star.renderable = starRenderable
                 star.select()
 
-                addShapeLabel(anchorNode, star, "Tap to name")
+                addShapeLabel(anchorNode, star, "Tap to name", selected)
             }
             10 -> {
                 val triangle = TransformableNode(fragment.transformationSystem)
@@ -275,13 +288,21 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 triangle.renderable = triangleRenderable
                 triangle.select()
 
+<<<<<<< HEAD
                 addShapeLabel(anchorNode, triangle, "Tap to name")
 
+=======
+                addShapeLabel(anchorNode, triangle, "Tap to name", selected)
+>>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
             }
         }
     }
 
+<<<<<<< HEAD
     private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, label: String) {
+=======
+    private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, label: String, id : Int) {
+>>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
         ViewRenderable.builder().setView(this, R.layout.label_layout)
             .build()
             .thenAccept { viewRenderable ->
@@ -293,9 +314,17 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 val textLabel = viewRenderable.view as TextView
                 textLabel.text = label // set's the text according to the label parsed
+<<<<<<< HEAD
                 textLabel.setOnClickListener {
                     anchorNode.setParent(null)
+=======
+                // Launch fragment for media capture
+                textLabel.setOnClickListener{
+                    val intent = Intent(this, MediaInputActivity::class.java)
+                    startActivity(intent)
+>>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
                 }
             }
     }
+
 }
