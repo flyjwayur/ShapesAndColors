@@ -63,7 +63,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_ar)
 
         if (savedInstanceState != null) {
-            fragment = getSupportFragmentManager().getFragment(
+            fragment = supportFragmentManager.getFragment(
                 savedInstanceState,
                 "arFragment"
             ) as ArFragment
@@ -91,7 +91,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //Save the fragment's instance
-        getSupportFragmentManager().putFragment(outState, "arFragment", fragment)
+        supportFragmentManager.putFragment(outState, "arFragment", fragment)
     }
 
     private fun setUpClickListener() {
@@ -413,7 +413,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                     val index = id - 1
                     val recFileName = audioList[index].replace(".raw", "")
                     val song =
-                        "android.resource://" + getPackageName() + "/raw/$recFileName"
+                        "android.resource://" + packageName + "/raw/$recFileName"
 
                     if (mPlayer == null) {
                         mPlayer = MediaPlayer().apply {
