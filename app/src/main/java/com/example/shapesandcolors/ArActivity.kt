@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.net.Uri
+import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
@@ -14,10 +16,7 @@ import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_ar.*
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ViewRenderable
-<<<<<<< HEAD
-=======
-
->>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
+import org.jetbrains.anko.toast
 
 class ArActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -42,14 +41,10 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_ar)
 
         if (savedInstanceState != null) {
-<<<<<<< HEAD
             fragment = getSupportFragmentManager().getFragment(
                 savedInstanceState,
                 "arFragment"
             ) as ArFragment
-=======
-            fragment = getSupportFragmentManager().getFragment(savedInstanceState, "arFragment") as ArFragment
->>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
         }
 
         arrayView = arrayOf(
@@ -69,14 +64,9 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
             createModel(anchorNode, selected)
         }
-
     }
 
-<<<<<<< HEAD
     override fun onSaveInstanceState(outState: Bundle) {
-=======
-    override fun onSaveInstanceState(outState : Bundle) {
->>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
         super.onSaveInstanceState(outState)
         //Save the fragment's instance
         getSupportFragmentManager().putFragment(outState, "arFragment", fragment)
@@ -288,21 +278,18 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 triangle.renderable = triangleRenderable
                 triangle.select()
 
-<<<<<<< HEAD
-                addShapeLabel(anchorNode, triangle, "Tap to name")
-
-=======
                 addShapeLabel(anchorNode, triangle, "Tap to name", selected)
->>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
             }
         }
     }
 
-<<<<<<< HEAD
-    private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, label: String) {
-=======
-    private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, label: String, id : Int) {
->>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
+
+    private fun addShapeLabel(
+        anchorNode: AnchorNode,
+        node: TransformableNode,
+        label: String,
+        id: Int
+    ) {
         ViewRenderable.builder().setView(this, R.layout.label_layout)
             .build()
             .thenAccept { viewRenderable ->
@@ -314,17 +301,52 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 val textLabel = viewRenderable.view as TextView
                 textLabel.text = label // set's the text according to the label parsed
-<<<<<<< HEAD
-                textLabel.setOnClickListener {
-                    anchorNode.setParent(null)
-=======
+
                 // Launch fragment for media capture
-                textLabel.setOnClickListener{
+                textLabel.setOnClickListener {
                     val intent = Intent(this, MediaInputActivity::class.java)
                     startActivity(intent)
->>>>>>> Add media Input Activity and it's UI, Cancel button working but not perfect
                 }
             }
+        ViewRenderable.builder().setView(this, R.layout.play_button)
+            .build()
+            .thenAccept { viewRenderable ->
+                val labelView = TransformableNode(fragment.transformationSystem)
+                labelView.localPosition =
+                    Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.7f, 0f)
+                labelView.setParent(anchorNode)
+                labelView.renderable = viewRenderable
+                labelView.select()
+
+                val playLabel = viewRenderable.view as Button
+
+                playLabel.setOnClickListener {
+                    toast("Play pressed")
+                    Log.d("DBG", "Play listener pressed")
+                }
+            }
+        ViewRenderable.builder().setView(this, R.layout.cancel_button)
+            .build()
+            .thenAccept { viewRenderable ->
+                val labelView = TransformableNode(fragment.transformationSystem)
+                labelView.localPosition =
+                    Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.475f, 0f)
+                labelView.setParent(anchorNode)
+                labelView.renderable = viewRenderable
+                labelView.select()
+
+                val deleteLabel = viewRenderable.view as Button
+
+                deleteLabel.setOnClickListener {
+                    anchorNode.setParent(null)
+                    toast("Delete pressed")
+                    Log.d("DBG", "Play listener pressed")
+                }
+            }
+    }
+
+    private fun playSound() {
+        toast("play button pressed")
     }
 
 }
