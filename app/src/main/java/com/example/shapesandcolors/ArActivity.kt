@@ -293,6 +293,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 // Launch fragment for media capture
                 textLabel.setOnClickListener{
                     val intent = Intent(this, MediaInputActivity::class.java)
+                    intent.putExtra("shape", id)
                     startActivity(intent)
                 }
             }
