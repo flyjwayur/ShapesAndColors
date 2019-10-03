@@ -11,10 +11,10 @@
     <color name="colorPastelPink">#FFB49D</color>
     <color name="colorPastelGreen">#A2E3DD</color>
     <color name="colorDarkPink">#C64B5F</color>
-<!--    <color name="colorLightPink">#E999B2</color>-->
-<!--    <color name="colorGreen">#1B9570</color>-->
-<!--    <color name="colorLightBeige">#FAEADB</color>-->
-<!--    <color name="colorDarkBeige">#D1AF96</color>-->
+    <!--    <color name="colorLightPink">#E999B2</color>-->
+    <!--    <color name="colorGreen">#1B9570</color>-->
+    <!--    <color name="colorLightBeige">#FAEADB</color>-->
+    <!--    <color name="colorDarkBeige">#D1AF96</color>-->
     <color name="white">#FFFFFF</color>
     <color name="aqua">#A0FFEE</color>
     <color name="black">#FF000000</color>

@@ -430,5 +430,4 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
     }
-
 }
