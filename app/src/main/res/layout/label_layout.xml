@@ -4,14 +4,14 @@
     android:id="@+id/shape_label"
     android:textColor="@color/colorPrimary"
     android:gravity="center"
-    android:text="@string/tap_to_name"
+    android:text="@string/label"
     android:textSize="30sp"
+    android:paddingRight="3dp"
+    android:paddingLeft="3dp"
     android:textAlignment="center"
     android:background="@drawable/round_bg"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:drawableRight="@drawable/ic_cancel_black_24dp"
-    android:drawableLeft="@drawable/ic_play_arrow_black_24dp"
     android:drawablePadding="8dp">
 
 </TextView>
