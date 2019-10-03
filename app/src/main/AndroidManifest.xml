@@ -3,6 +3,7 @@
     package="com.example.shapesandcolors">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:name="android.hardware.camera.ar" />
 
@@ -13,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ArActivity"></activity>
+        <activity android:name=".FetchImageDetailActivity"></activity>
+        <activity android:name=".ArActivity" />
         <activity android:name=".FetchImageActivity" />
         <activity android:name=".PlayActivity" />
         <activity android:name=".MainActivity">
