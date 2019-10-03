@@ -305,6 +305,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+
     private fun addShapeLabel(
         anchorNode: AnchorNode,
         node: TransformableNode,
@@ -381,7 +382,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
             .thenAccept { viewRenderable ->
                 val labelView = TransformableNode(fragment.transformationSystem)
                 labelView.localPosition =
-                    Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.25f, 0f)
+                    Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.475f, 0f)
                 labelView.setParent(anchorNode)
                 labelView.renderable = viewRenderable
                 labelView.select()
