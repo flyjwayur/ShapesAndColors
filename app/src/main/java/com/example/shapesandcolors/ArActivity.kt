@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.net.Uri
+import android.os.Environment
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
@@ -17,13 +18,24 @@ import kotlinx.android.synthetic.main.activity_ar.*
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ViewRenderable
 import org.jetbrains.anko.toast
+import java.io.File
+import java.io.FileInputStream
+import java.io.IOException
 
 
 class ArActivity : AppCompatActivity(), View.OnClickListener {
 
+    lateinit var file: File
     lateinit var arrayView : Array<View>
     internal var selected = 1 // chosen renderable by default
     private lateinit var fragment: ArFragment
+
+    private var label: String? = null
+    private val defaultShapeName = "Tap to name"
+    private val audioList = listOf("circle.raw", "diamond.raw", "heart.raw", "hexagon.raw", "octagon.raw",
+        "oval.raw", "rectangle.raw", "square.raw", "star.raw", "triangle.raw")
+    private val textFileList = listOf("circle.txt", "diamond.txt", "heart.txt", "hexagon.txt", "octagon.txt",
+        "oval.txt", "rectangle.txt", "square.txt", "star.txt", "triangle.txt")
 
     // Models
     private var circleRenderable: ModelRenderable? = null
@@ -61,6 +73,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
             createModel(anchorNode, selected)
         }
+
 
     }
 
@@ -185,7 +198,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 circle.renderable = circleRenderable
                 circle.select()
 
-                addShapeLabel(anchorNode, circle, "Tap to name", selected)
+                addShapeLabel(anchorNode, circle, "circle", selected)
             }
             2 -> {
                 val diamond = TransformableNode(fragment.transformationSystem)
@@ -195,7 +208,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 diamond.renderable = diamondRenderable
                 diamond.select()
 
-                addShapeLabel(anchorNode, diamond, "Tap to name", selected)
+                addShapeLabel(anchorNode, diamond, "diamond", selected)
             }
             3 -> {
                 val heart = TransformableNode(fragment.transformationSystem)
@@ -205,7 +218,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 heart.renderable = heartRenderable
                 heart.select()
 
-                addShapeLabel(anchorNode, heart, "Tap to name", selected)
+                addShapeLabel(anchorNode, heart, "heart", selected)
             }
             4 -> {
                 val hexagon = TransformableNode(fragment.transformationSystem)
@@ -215,7 +228,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 hexagon.renderable = hexagonRenderable
                 hexagon.select()
 
-                addShapeLabel(anchorNode, hexagon, "Tap to name", selected)
+                addShapeLabel(anchorNode, hexagon, "hexagon", selected)
             }
             5 -> {
                 val octagon = TransformableNode(fragment.transformationSystem)
@@ -225,7 +238,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 octagon.renderable = octagonRenderable
                 octagon.select()
 
-                addShapeLabel(anchorNode, octagon, "Tap to name", selected)
+                addShapeLabel(anchorNode, octagon, "octagon", selected)
             }
             6 -> {
                 val oval = TransformableNode(fragment.transformationSystem)
@@ -235,7 +248,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 oval.renderable = ovalRenderable
                 oval.select()
 
-                addShapeLabel(anchorNode, oval, "Tap to name", selected)
+                addShapeLabel(anchorNode, oval, "oval", selected)
             }
             7 -> {
                 val rectangle = TransformableNode(fragment.transformationSystem)
@@ -245,7 +258,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 rectangle.renderable = rectangleRenderable
                 rectangle.select()
 
-                addShapeLabel(anchorNode, rectangle, "Tap to name", selected)
+                addShapeLabel(anchorNode, rectangle, "rectangle", selected)
             }
             8 -> {
                 val square = TransformableNode(fragment.transformationSystem)
@@ -255,7 +268,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 square.renderable = squareRenderable
                 square.select()
 
-                addShapeLabel(anchorNode, square, "Tap to name", selected)
+                addShapeLabel(anchorNode, square, "square", selected)
             }
             9 -> {
                 val star = TransformableNode(fragment.transformationSystem)
@@ -265,7 +278,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 star.renderable = starRenderable
                 star.select()
 
-                addShapeLabel(anchorNode, star, "Tap to name", selected)
+                addShapeLabel(anchorNode, star, "star", selected)
             }
             10 -> {
                 val triangle = TransformableNode(fragment.transformationSystem)
@@ -276,12 +289,25 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 triangle.renderable = triangleRenderable
                 triangle.select()
 
-                addShapeLabel(anchorNode, triangle, "Tap to name", selected)
+                addShapeLabel(anchorNode, triangle, "triangle", selected)
             }
         }
     }
 
-    private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, label: String, id : Int) {
+    private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, audiofile: String, id : Int) {
+
+        val index = id - 1
+        // Audio resource values
+        val recFileName = audioList[index]
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
+        try {
+            file = File(storageDir.toString() + "/"+ recFileName)
+        } catch (ex: IOException) {
+            toast("File doesn't exist in directory")
+        }
+        // Label text resource
+        val textFILE = textFileList[index]
+
         ViewRenderable.builder().setView(this, R.layout.label_layout)
             .build()
             .thenAccept { viewRenderable ->
@@ -292,11 +318,24 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 labelView.select()
 
                 val textLabel = viewRenderable.view as TextView
-                textLabel.text = label // set's the text according to the label parsed
-                // Launch fragment for media capture
+
+                // textLabel.text = defaultShapeName // set's the text according to the label parsed
+                // Launch activity for media capture
+
+                if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
+                    try {
+                        val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+                        val txtfile = File(dir, textFILE)
+                        textLabel.text = txtfile.readText()
+                    } catch (ex: IOException) {
+                        textLabel.text = defaultShapeName
+                        Log.d("ReadText", ex.toString())
+                    }
+                }
+
                 textLabel.setOnClickListener{
                     val intent = Intent(this, MediaInputActivity::class.java)
-                    intent.putExtra("shape", id)
+                    intent.putExtra("shapeSoundName", audiofile)
                     startActivity(intent)
                 }
             }
@@ -312,8 +351,14 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 val playLabel = viewRenderable.view as Button
 
                 playLabel.setOnClickListener {
-                    toast("Play pressed")
-                    Log.d("DBG", "Play listener pressed")
+                    try {
+                        val inputStream = FileInputStream(file)
+                        val myRunnable = PlayAudio(inputStream)
+                        val myThread = Thread(myRunnable)
+                        myThread.start()
+                    } catch (ex: IOException) {
+                        toast("Audio file not found")
+                    }
                 }
             }
         ViewRenderable.builder().setView(this, R.layout.cancel_button)
@@ -329,8 +374,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 deleteLabel.setOnClickListener {
                     anchorNode.setParent(null)
-                    toast("Delete pressed")
-                    Log.d("DBG", "Play listener pressed")
                 }
             }
     }
