@@ -16,4 +16,7 @@
 <!--    <color name="colorLightBeige">#FAEADB</color>-->
 <!--    <color name="colorDarkBeige">#D1AF96</color>-->
     <color name="white">#FFFFFF</color>
+    <color name="aqua">#A0FFEE</color>
+    <color name="black">#FF000000</color>
+
 </resources>
