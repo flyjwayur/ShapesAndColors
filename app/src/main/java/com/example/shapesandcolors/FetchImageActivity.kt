@@ -42,6 +42,7 @@ class FetchImageActivity : AppCompatActivity() {
     }
 
     private fun fetchColorFromAPI(hex: String){
+        Log.d(resp, hex)
         val call: Call<QueryResult> = queryService.getQuery(hex)
         call.enqueue(object : retrofit2.Callback<QueryResult>{
             override fun onFailure(call: Call<QueryResult>, t: Throwable) {
@@ -51,7 +52,8 @@ class FetchImageActivity : AppCompatActivity() {
             override fun onResponse(call: Call<QueryResult>, response: Response<QueryResult>) {
                 if(response.body() != null){
                      Log.d(resp, "${response.body()}")
-                     colorFromAPI.text = response.body()?.query?.colorInfo?.colors.toString()
+                     Log.d(resp, "${response.body()?.query?.image.toString()}")
+                     colorFromAPI.text = response.body()?.query?.image.toString()
                 }
             }
         })
