@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">ShapesAndColors</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="colorGame_imageExample">Example image</string>
+    <string name="color_check">Check</string>
+    <string name="color_coming">Color coming:D</string>
     <string name="tap_to_name">Tap to name</string>
-    <string name="record_shape_name_audio">Record shape name audio</string>
+    <string name="record_shape_name_audio">Record shape name &amp; audio</string>
     <string name="type_shape_name_her">Type Shape name her</string>
+    <string name="label">label</string>
+    <string name="reset">Reset</string>
+    <string name="save">Save</string>
+    <string name="y_axis">Y-Axis</string>
+    <string name="z_axis">Z-Axis</string>
+    <string name="x_axis">X-Axis</string>
 </resources>
