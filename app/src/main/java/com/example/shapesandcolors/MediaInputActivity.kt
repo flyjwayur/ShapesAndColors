@@ -4,6 +4,7 @@ import android.app.PendingIntent.getActivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_media_input.*
 import kotlinx.android.synthetic.main.activity_media_input.view.*
@@ -14,10 +15,11 @@ import java.io.IOException
 
 class MediaInputActivity : AppCompatActivity() {
 
-    lateinit var file: File
-    lateinit var recordTheVoice: RecordAudio
+    lateinit var audioFile: File
+    private lateinit var recordTheVoice: RecordAudio
     private var valueString: String? = null
-    private var textFILE: String? = null
+    private lateinit var textFILE: String
+    private lateinit var recFileName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,18 +30,18 @@ class MediaInputActivity : AppCompatActivity() {
         requestPermissions(arrayOf(android.Manifest.permission.RECORD_AUDIO),1)
 
         textFILE = "$valueString.txt"
-        val recFileName = "$valueString.raw"
+        recFileName = "$valueString.raw"
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
         try {
-            file = File(storageDir.toString() + "/"+ recFileName)
+            audioFile = File(storageDir.toString() + "/"+ recFileName)
         } catch (ex: IOException) {
             toast("File doesn't exist in directory")
         }
-        recordTheVoice = RecordAudio(this, this, file)
+        recordTheVoice = RecordAudio(this, this, audioFile)
 
         playBtn.setOnClickListener {
             try {
-                val inputStream = FileInputStream(file)
+                val inputStream = FileInputStream(audioFile)
                 val myRunnable = PlayAudio(inputStream)
                 val myThread = Thread(myRunnable)
                 myThread.start()
@@ -73,13 +75,18 @@ class MediaInputActivity : AppCompatActivity() {
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             try {
                 val dir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-                val file = File(dir, textFILE)
+                val txtfile = File(dir, textFILE)
                 val inputText = textInputEditText.text
-                file.writeText("$inputText")
+                if(inputText!!.isNotBlank()) {
+                    if (inputText.length >= 3) {
+                        txtfile.writeText("$inputText")
+                        toast("Save successful!")
+                        onBackPressed()
+                    } else {
+                        toast("Give at least 3 characters")
+                    }
+                }
                 textInputEditText.text?.clear()
-
-                toast("Save successful!")
-
             } catch (ex: IOException){
                 toast("Failed saving file.")
             }
@@ -87,6 +94,25 @@ class MediaInputActivity : AppCompatActivity() {
     }
 
     private fun onCancelMedia(v: View?) {
+        // Delete shape's label text
+        if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
+            try {
+                val dir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+                File(dir, textFILE).delete()
+            } catch (ex: IOException){
+                toast("Deleting text file failed.")
+            }
+        }
+        // Delete shape's Audio File
+        try {
+            val storageDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
+            val deleteAudioFile = File(storageDir.toString() + "/"+ recFileName)
+            deleteAudioFile.delete()
+        } catch (ex: IOException){
+            Log.d("DBG", "No audio file to delete")
+            toast("Deleting Audio file failed.")
+        }
+        toast("Shape's Defaults Restored")
         onBackPressed()
     }
 }

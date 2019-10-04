@@ -21,6 +21,11 @@ import org.jetbrains.anko.toast
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
+import sun.invoke.util.VerifyAccess.getPackageName
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+
+
 
 
 class ArActivity : AppCompatActivity(), View.OnClickListener {
@@ -296,18 +301,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, audiofile: String, id : Int) {
 
-        val index = id - 1
-        // Audio resource values
-        val recFileName = audioList[index]
-        val storageDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
-        try {
-            file = File(storageDir.toString() + "/"+ recFileName)
-        } catch (ex: IOException) {
-            toast("File doesn't exist in directory")
-        }
-        // Label text resource
-        val textFILE = textFileList[index]
-
         ViewRenderable.builder().setView(this, R.layout.label_layout)
             .build()
             .thenAccept { viewRenderable ->
@@ -319,8 +312,9 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 val textLabel = viewRenderable.view as TextView
 
-                // textLabel.text = defaultShapeName // set's the text according to the label parsed
-                // Launch activity for media capture
+                // Label text resource
+                val index = id - 1
+                val textFILE = textFileList[index]
 
                 if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
                     try {
@@ -350,7 +344,17 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 val playLabel = viewRenderable.view as Button
 
+                // Audio resource values
                 playLabel.setOnClickListener {
+                    val index = id - 1
+                    val recFileName = audioList[index]
+                    val storageDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
+                    try {
+                        file = File(storageDir.toString() + "/"+ recFileName)
+                    } catch (ex: IOException) {
+                        toast("Create Audio file first")
+                    }
+
                     try {
                         val inputStream = FileInputStream(file)
                         val myRunnable = PlayAudio(inputStream)
@@ -365,7 +369,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
             .build()
             .thenAccept { viewRenderable ->
                 val labelView = TransformableNode(fragment.transformationSystem)
-                labelView.localPosition = Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.475f, 0f)
+                labelView.localPosition = Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.25f, 0f)
                 labelView.setParent(anchorNode)
                 labelView.renderable = viewRenderable
                 labelView.select()
@@ -376,10 +380,36 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                     anchorNode.setParent(null)
                 }
             }
-    }
+        ViewRenderable.builder().setView(this, R.layout.checkshape_button)
+            .build()
+            .thenAccept { viewRenderable ->
+                val labelView = TransformableNode(fragment.transformationSystem)
+                labelView.localPosition = Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.475f, 0f)
+                labelView.setParent(anchorNode)
+                labelView.renderable = viewRenderable
+                labelView.select()
 
-    private fun playSound() {
-        toast("play button pressed")
+                val checkLabel = viewRenderable.view as Button
+
+                // Audio resource values
+                checkLabel.setOnClickListener {
+                    val index = id - 1
+                    val recFileName = audioList[index].replace(".raw", "")
+                    // Log.d("DBG", recFileName)
+
+                    try {
+                        val audioId = resources.getIdentifier(recFileName, "raw", getPackageName())
+                        val inputStream = resources.openRawResource(R.raw.recFileName)
+                        val inputStream2 = resources.openRawResource(R.raw.audioId)
+                        val myRunnable = PlayAudio(inputStream)
+                        val myThread = Thread(myRunnable)
+                        myThread.start()
+                    } catch (ex: IOException) {
+                        toast("Correct Audio file not found")
+                    }
+
+                }
+            }
     }
 
 }
