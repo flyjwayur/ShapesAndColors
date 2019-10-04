@@ -5,7 +5,7 @@
     <string name="color_check">Check</string>
     <string name="color_coming">Color coming:D</string>
     <string name="tap_to_name">Tap to name</string>
-    <string name="record_shape_name_audio">Record shape name audio</string>
+    <string name="record_shape_name_audio">Record shape name &amp; audio</string>
     <string name="type_shape_name_her">Type Shape name her</string>
     <string name="label">label</string>
 </resources>
