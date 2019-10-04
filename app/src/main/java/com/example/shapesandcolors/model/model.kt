@@ -6,10 +6,6 @@ data class Image(
     @SerializedName("named")
     val named: String)
 
-data class Query(
+data class QueryResult(
     @SerializedName("image")
     val image: Image)
-
-data class QueryResult(
-    @SerializedName("query")
-    val query: Query)

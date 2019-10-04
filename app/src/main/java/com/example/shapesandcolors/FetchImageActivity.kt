@@ -50,11 +50,10 @@ class FetchImageActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<QueryResult>, response: Response<QueryResult>) {
-                if(response.body() != null){
-                     Log.d(resp, "${response.body()}")
-                     Log.d(resp, "${response.body()?.query?.image.toString()}")
-                     colorFromAPI.text = response.body()?.query?.image.toString()
-                }
+                if (response.body() != null)
+                    Log.d(resp, "${response.body()}")
+                Log.d(resp, "${response.body()?.image?.named.toString()}")
+                colorFromAPI.text = response.body()?.image?.named.toString()
             }
         })
     }
