@@ -13,7 +13,7 @@ class QueryApiService {
         .build()
         .create(QueryApi::class.java)
 
-    fun getQuery(hex:String): Call<QueryResult> {
+    fun getQuery(hex: String): Call<QueryResult> {
         return api.getQuery(hex = hex)
     }
 

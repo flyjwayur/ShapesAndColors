@@ -14,8 +14,7 @@ import kotlinx.android.synthetic.main.activity_fetch_image.*
 import retrofit2.Call
 import retrofit2.Response
 
-const val tag = "DGB"
-const val resp = "RES"
+
 class FetchImageActivity : AppCompatActivity() {
 
     private val queryService = QueryApiService()
@@ -28,12 +27,10 @@ class FetchImageActivity : AppCompatActivity() {
         listView_colors.adapter = adapter
 
         listView_colors.setOnItemClickListener { _, _, position, _ ->
-            Log.d(tag, "Selected $position")
             fetchColorFromAPI(GlobalModel.colors[position].hex)
-            Log.d(resp, GlobalModel.colors[position].hex)
         }
 
-        listView_colors.setOnItemLongClickListener{ _, _, position, _ ->
+        listView_colors.setOnItemLongClickListener { _, _, position, _ ->
             val selectedColor = GlobalModel.colors[position]
             val detailIntent = FetchImageDetailActivity.newIntent(this, selectedColor)
             startActivity(detailIntent)
@@ -41,26 +38,28 @@ class FetchImageActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchColorFromAPI(hex: String){
-        Log.d(resp, hex)
+    private fun fetchColorFromAPI(hex: String) {
         val call: Call<QueryResult> = queryService.getQuery(hex)
-        call.enqueue(object : retrofit2.Callback<QueryResult>{
+        call.enqueue(object : retrofit2.Callback<QueryResult> {
             override fun onFailure(call: Call<QueryResult>, t: Throwable) {
                 println(t.toString())
             }
 
             override fun onResponse(call: Call<QueryResult>, response: Response<QueryResult>) {
                 if (response.body() != null)
-                    Log.d(resp, "${response.body()}")
-                Log.d(resp, "${response.body()?.image?.named.toString()}")
-                colorFromAPI.text = response.body()?.image?.named.toString()
+                    colorFromAPI.text = response.body()?.image?.named.toString()
             }
         })
     }
 
-    private inner class ColorListAdapter(context: Context, private val colors: MutableList<ColorData>) : BaseAdapter(){
+    private inner class ColorListAdapter(
+        context: Context,
+        private val colors: MutableList<ColorData>
+    ) : BaseAdapter() {
 
-        private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        private val inflater: LayoutInflater =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
         override fun getCount(): Int {
             return colors.size
         }

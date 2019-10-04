@@ -16,7 +16,7 @@ class FetchImageDetailActivity : AppCompatActivity() {
         const val EXTRA_URL = "url"
         const val COLORAPI_URL = "http://www.thecolorapi.com/"
 
-        fun newIntent(context: Context, colorData:ColorData): Intent {
+        fun newIntent(context: Context, colorData: ColorData): Intent {
             val detailIntent = Intent(context, FetchImageDetailActivity::class.java)
 
             detailIntent.putExtra(EXTRA_TITLE, colorData.name)
