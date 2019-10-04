@@ -13,6 +13,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
 
+
 class MediaInputActivity : AppCompatActivity() {
 
     lateinit var audioFile: File
@@ -27,13 +28,13 @@ class MediaInputActivity : AppCompatActivity() {
 
         valueString = intent.getStringExtra("shapeSoundName")
 
-        requestPermissions(arrayOf(android.Manifest.permission.RECORD_AUDIO),1)
+        requestPermissions(arrayOf(android.Manifest.permission.RECORD_AUDIO), 1)
 
         textFILE = "$valueString.txt"
         recFileName = "$valueString.raw"
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
         try {
-            audioFile = File(storageDir.toString() + "/"+ recFileName)
+            audioFile = File(storageDir.toString() + "/" + recFileName)
         } catch (ex: IOException) {
             toast("File doesn't exist in directory")
         }
@@ -60,15 +61,16 @@ class MediaInputActivity : AppCompatActivity() {
 
         btn_save.setOnClickListener { onSaveMedia(it) }
         btn_cancel.setOnClickListener { onCancelMedia(it) }
+
     }
 
     private fun recordSound() {
-        val myThread2 =Thread(recordTheVoice)
+        val myThread2 = Thread(recordTheVoice)
         myThread2.start()
     }
 
     private fun stopRecording() {
-        recordTheVoice.recRunning =false
+        recordTheVoice.recRunning = false
     }
 
     private fun onSaveMedia(v: View?) {
@@ -77,7 +79,7 @@ class MediaInputActivity : AppCompatActivity() {
                 val dir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
                 val txtfile = File(dir, textFILE)
                 val inputText = textInputEditText.text
-                if(inputText!!.isNotBlank()) {
+                if (inputText!!.isNotBlank()) {
                     if (inputText.length >= 3) {
                         txtfile.writeText("$inputText")
                         toast("Save successful!")
@@ -87,7 +89,7 @@ class MediaInputActivity : AppCompatActivity() {
                     }
                 }
                 textInputEditText.text?.clear()
-            } catch (ex: IOException){
+            } catch (ex: IOException) {
                 toast("Failed saving file.")
             }
         }
@@ -99,16 +101,16 @@ class MediaInputActivity : AppCompatActivity() {
             try {
                 val dir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
                 File(dir, textFILE).delete()
-            } catch (ex: IOException){
+            } catch (ex: IOException) {
                 toast("Deleting text file failed.")
             }
         }
         // Delete shape's Audio File
         try {
             val storageDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
-            val deleteAudioFile = File(storageDir.toString() + "/"+ recFileName)
+            val deleteAudioFile = File(storageDir.toString() + "/" + recFileName)
             deleteAudioFile.delete()
-        } catch (ex: IOException){
+        } catch (ex: IOException) {
             Log.d("DBG", "No audio file to delete")
             toast("Deleting Audio file failed.")
         }
