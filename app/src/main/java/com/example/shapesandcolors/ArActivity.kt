@@ -2,6 +2,8 @@ package com.example.shapesandcolors
 
 import android.content.Intent
 import android.graphics.Color
+import android.media.AudioManager
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,7 +23,6 @@ import org.jetbrains.anko.toast
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
-import sun.invoke.util.VerifyAccess.getPackageName
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 
@@ -32,8 +33,9 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var file: File
     lateinit var arrayView : Array<View>
-    internal var selected = 1 // chosen renderable by default
+    private var selected = 1 // chosen renderable by default
     private lateinit var fragment: ArFragment
+    private var mPlayer: MediaPlayer? = null
 
     private var label: String? = null
     private val defaultShapeName = "Tap to name"
@@ -391,25 +393,25 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 val checkLabel = viewRenderable.view as Button
 
-                // Audio resource values
+                // Audio for correct shape and color
                 checkLabel.setOnClickListener {
                     val index = id - 1
                     val recFileName = audioList[index].replace(".raw", "")
-                    // Log.d("DBG", recFileName)
+                    val song = "android.resource://" + getPackageName() + "/raw/$recFileName"
 
-                    try {
-                        val audioId = resources.getIdentifier(recFileName, "raw", getPackageName())
-                        val inputStream = resources.openRawResource(R.raw.recFileName)
-                        val inputStream2 = resources.openRawResource(R.raw.audioId)
-                        val myRunnable = PlayAudio(inputStream)
-                        val myThread = Thread(myRunnable)
-                        myThread.start()
-                    } catch (ex: IOException) {
-                        toast("Correct Audio file not found")
+                    if (mPlayer == null) {
+                        mPlayer = MediaPlayer().apply {
+                            setAudioStreamType(AudioManager.STREAM_MUSIC)
+                            setDataSource(applicationContext, Uri.parse(song))
+                            prepare()
+                            start()
+                        }
+                        mPlayer!!.setOnCompletionListener {
+                            mPlayer!!.release()
+                            mPlayer = null
+                        }
                     }
-
                 }
             }
     }
-
 }
