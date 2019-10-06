@@ -65,8 +65,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         arrayView = arrayOf(
-            imv_circle, imv_heart, imv_hexagon, imv_circle2, imv_heart2,
-            imv_hexagon2, imv_circle3, imv_heart3, imv_hexagon3, imv_circle4)
+            imv_circle, imv_diamond, imv_heart, imv_hexagon, imv_octagon,
+            imv_oval, imv_rectangle, imv_square, imv_star, imv_triangle)
 
         setUpClickListener()
         setUpModel()
@@ -103,39 +103,39 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 myBackground(view.id)
                 // Toast.makeText(this, "Image $selected", Toast.LENGTH_SHORT).show()
             }
-            R.id.imv_heart -> {
+            R.id.imv_diamond -> {
                 selected = 2
                 myBackground(view.id)
             }
-            R.id.imv_hexagon -> {
+            R.id.imv_heart -> {
                 selected = 3
                 myBackground(view.id)
             }
-            R.id.imv_circle2 -> {
+            R.id.imv_hexagon -> {
                 selected = 4
                 myBackground(view.id)
             }
-            R.id.imv_heart2 -> {
+            R.id.imv_octagon -> {
                 selected = 5
                 myBackground(view.id)
             }
-            R.id.imv_hexagon2 -> {
+            R.id.imv_oval -> {
                 selected = 6
                 myBackground(view.id)
             }
-            R.id.imv_circle3 -> {
+            R.id.imv_rectangle -> {
                 selected = 7
                 myBackground(view.id)
             }
-            R.id.imv_heart3 -> {
+            R.id.imv_square -> {
                 selected = 8
                 myBackground(view.id)
             }
-            R.id.imv_hexagon3 -> {
+            R.id.imv_star -> {
                 selected = 9
                 myBackground(view.id)
             }
-            R.id.imv_circle4 -> {
+            R.id.imv_triangle -> {
                 selected = 10
                 myBackground(view.id)
             }
