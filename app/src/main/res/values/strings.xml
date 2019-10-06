@@ -8,4 +8,6 @@
     <string name="record_shape_name_audio">Record shape name &amp; audio</string>
     <string name="type_shape_name_her">Type Shape name her</string>
     <string name="label">label</string>
+    <string name="reset">Reset</string>
+    <string name="save">Save</string>
 </resources>
