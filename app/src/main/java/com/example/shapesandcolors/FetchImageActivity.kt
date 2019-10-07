@@ -26,6 +26,7 @@ class FetchImageActivity : AppCompatActivity() {
     private val queryService = QueryApiService()
     //Image URL from Color API to fetch color square
     private var imageLink: String? = null
+    private lateinit var colorItem:String
     val colorOjects: Array<Int> =
         arrayOf(
             R.drawable.apple,
@@ -47,14 +48,14 @@ class FetchImageActivity : AppCompatActivity() {
         listView_colors.adapter = adapter
 
         recyclerV_colors_grid.layoutManager = GridLayoutManager(this,3 )
-        recyclerV_colors_grid.adapter = ColorsAdapter(GlobalModel.colors)
+        recyclerV_colors_grid.adapter = ColorsAdapter(GlobalModel.colors, this, {hexItem-> fetchColorFromAPI(hexItem)})
 
         val selectedColorObject = colorOjects.random()
         imgV_colorObject.setImageResource(selectedColorObject)
 
 
         listView_colors.setOnItemClickListener { _, _, position, _ ->
-            fetchColorFromAPI(GlobalModel.colors[position].hex)
+
             Log.d("after check Network", "$imageLink")
         }
 
