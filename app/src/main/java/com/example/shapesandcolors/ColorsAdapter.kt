@@ -17,7 +17,7 @@ const val tag = "DBG"
 class ColorsAdapter(
     val colorList: MutableList<ColorData>,
     val context: Context,
-    val adapterOnClick: (String)-> Unit
+    val adapterOnClick: (String) -> Unit
 ) : RecyclerView.Adapter<ColorsAdapter.ColorsViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -26,7 +26,7 @@ class ColorsAdapter(
     ): ColorsViewHolder {
         val v = LayoutInflater.from(parent?.context)
             .inflate(R.layout.grid_view_color_item, parent, false)
-        return ColorsViewHolder(v);
+        return ColorsViewHolder(v)
     }
 
     override fun getItemCount(): Int {
@@ -37,8 +37,6 @@ class ColorsAdapter(
     override fun onBindViewHolder(holder: ColorsViewHolder, position: Int) {
         val colorName = colorList[position].name
         val colorHex = colorList[position].hex
-//        val allColorHex: HashMap<String, Int> = HashMap()
-//        allColorHex[colorName] = position
         Log.d(tag, "color name, hex: $colorName, $colorHex")
         if (colorHex === "#000000" || colorHex === "#0000FF") {
             holder.containerView.textV_oneColor.setTextColor(Color.parseColor("#FFFFFF"))
@@ -53,5 +51,4 @@ class ColorsAdapter(
     }
 
     inner class ColorsViewHolder(val containerView: View) : RecyclerView.ViewHolder(containerView)
-
 }

@@ -2,7 +2,6 @@ package com.example.shapesandcolors
 
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,15 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.GridLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.shapesandcolors.model.*
-import kotlinx.android.synthetic.main.activity_ar.*
 import kotlinx.android.synthetic.main.activity_fetch_image.*
 import retrofit2.Call
 import retrofit2.Response
-import java.io.IOException
 
 
 class FetchImageActivity : AppCompatActivity() {
@@ -26,7 +22,6 @@ class FetchImageActivity : AppCompatActivity() {
     private val queryService = QueryApiService()
     //Image URL from Color API to fetch color square
     private var imageLink: String? = null
-    private lateinit var colorItem: String
     val colorOjects: HashMap<String, Int> =
         hashMapOf(
             "Apple" to R.drawable.apple,
@@ -77,7 +72,6 @@ class FetchImageActivity : AppCompatActivity() {
             override fun onResponse(call: Call<QueryResult>, response: Response<QueryResult>) {
                 if (response.body() != null)
                     imageLink = response.body()?.image?.named
-//                colorFromAPI.text = imageLink
                 webV_APIshape.loadUrl(imageLink)
             }
         })
