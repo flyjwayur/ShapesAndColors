@@ -26,7 +26,7 @@ class FetchImageActivity : AppCompatActivity() {
     private val queryService = QueryApiService()
     //Image URL from Color API to fetch color square
     private var imageLink: String? = null
-    private lateinit var colorItem:String
+    private lateinit var colorItem: String
     val colorOjects: HashMap<String, Int> =
         hashMapOf(
             "Apple" to R.drawable.apple,
@@ -40,8 +40,6 @@ class FetchImageActivity : AppCompatActivity() {
         )
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fetch_image)
@@ -49,14 +47,17 @@ class FetchImageActivity : AppCompatActivity() {
         val adapter = ColorListAdapter(this, GlobalModel.colors)
         listView_colors.adapter = adapter
 
-        recyclerV_colors_grid.layoutManager = GridLayoutManager(this,3 )
-        recyclerV_colors_grid.adapter = ColorsAdapter(GlobalModel.colors, this, {hexItem-> fetchColorFromAPI(hexItem)})
+        recyclerV_colors_grid.layoutManager = GridLayoutManager(this, 3)
+        recyclerV_colors_grid.adapter =
+            ColorsAdapter(GlobalModel.colors, this, { hexItem -> fetchColorFromAPI(hexItem) })
 
         val selectedColorObject = colorOjects.values.random()
-        val keyOfSelectColorObject = colorOjects.filterValues{ it == selectedColorObject}.keys.first()
+        val keyOfSelectColorObject =
+            colorOjects.filterValues { it == selectedColorObject }.keys.first()
         Log.d("DBG Message", keyOfSelectColorObject)
         imgV_colorObject.setImageResource(selectedColorObject)
-        textV_colorGameDesc2.text="Choose the color of $keyOfSelectColorObject from the color palette"
+        textV_colorGameDesc2.text =
+            "Choose the color of $keyOfSelectColorObject from the color palette"
 
         listView_colors.setOnItemLongClickListener { _, _, position, _ ->
             val selectedColor = GlobalModel.colors[position]
