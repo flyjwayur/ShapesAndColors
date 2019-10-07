@@ -12,8 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class FetchImageDetailActivity : AppCompatActivity() {
 
     companion object {
-        const val EXTRA_TITLE = "title"
-        const val EXTRA_URL = "url"
+        //Still need to figure out more with extra title/url
+        const val EXTRA_TITLE = "hex=00000"
+        const val EXTRA_URL = "id?format=svg&"
         const val COLORAPI_URL = "http://www.thecolorapi.com/"
 
         fun newIntent(context: Context, colorData: ColorData): Intent {

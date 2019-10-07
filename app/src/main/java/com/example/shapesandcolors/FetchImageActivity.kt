@@ -1,13 +1,8 @@
 package com.example.shapesandcolors
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
+
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.ConnectivityManager
-import android.os.AsyncTask
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,43 +15,15 @@ import com.example.shapesandcolors.model.*
 import kotlinx.android.synthetic.main.activity_fetch_image.*
 import retrofit2.Call
 import retrofit2.Response
-import java.io.BufferedInputStream
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
+import java.io.IOException
 
 
 class FetchImageActivity : AppCompatActivity() {
 
     private val queryService = QueryApiService()
     //Image URL from Color API to fetch color square
-    data class URLparams(val url: URL)
-    private var imageLink:String? = null
+    private var imageLink: String? = null
 
-    inner class GetConn : AsyncTask<Unit?, Unit, Bitmap>(){
-
-        override fun doInBackground(vararg urlp: Unit?): Bitmap?{
-            var img: Bitmap? = null
-            try {
-                val url = URL(imageLink)
-                val conn = url.openConnection() as HttpURLConnection
-                val istream: InputStream = conn.getInputStream()
-                val bis = BufferedInputStream(istream)
-                img = BitmapFactory.decodeStream(bis)
-                bis.close()
-                istream.close()
-
-            }catch (e: Exception) {
-                Log.e("Connection", "Reading error", e);
-            }
-
-            return img
-        }
-
-        override fun onPostExecute(result: Bitmap?) {
-            imgV_APIshape.setImageBitmap(result)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,17 +33,8 @@ class FetchImageActivity : AppCompatActivity() {
         listView_colors.adapter = adapter
 
         listView_colors.setOnItemClickListener { _, _, position, _ ->
-            if (isNetworkAvailable()) {
-                Log.d("after check Network", "$imageLink")
-                // Fetch the json data
-                //Fetch the image data
-//            val myURLparams = URLparams(URL(imageLink))
-                fetchColorFromAPI(GlobalModel.colors[position].hex)
-
-                if(imageLink != null){
-                    GetConn().execute()
-                }
-            }
+            fetchColorFromAPI(GlobalModel.colors[position].hex)
+            Log.d("after check Network", "$imageLink")
         }
 
         listView_colors.setOnItemLongClickListener { _, _, position, _ ->
@@ -85,8 +43,6 @@ class FetchImageActivity : AppCompatActivity() {
             startActivity(detailIntent)
             true
         }
-
-
     }
 
     private fun fetchColorFromAPI(hex: String) {
@@ -98,17 +54,13 @@ class FetchImageActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<QueryResult>, response: Response<QueryResult>) {
                 if (response.body() != null)
-                    imageLink =  response.body()?.image?.named
-                    colorFromAPI.text = imageLink
+                    imageLink = response.body()?.image?.named
+                colorFromAPI.text = imageLink
+                webV_APIshape.loadUrl(imageLink)
             }
         })
     }
 
-
-    private fun isNetworkAvailable(): Boolean {
-        val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return cm.activeNetworkInfo?.isConnected == true
-    }
 
     private inner class ColorListAdapter(
         context: Context,
