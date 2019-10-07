@@ -53,12 +53,6 @@ class FetchImageActivity : AppCompatActivity() {
         val selectedColorObject = colorOjects.random()
         imgV_colorObject.setImageResource(selectedColorObject)
 
-
-        listView_colors.setOnItemClickListener { _, _, position, _ ->
-
-            Log.d("after check Network", "$imageLink")
-        }
-
         listView_colors.setOnItemLongClickListener { _, _, position, _ ->
             val selectedColor = GlobalModel.colors[position]
             val detailIntent = FetchImageDetailActivity.newIntent(this, selectedColor)
@@ -77,7 +71,7 @@ class FetchImageActivity : AppCompatActivity() {
             override fun onResponse(call: Call<QueryResult>, response: Response<QueryResult>) {
                 if (response.body() != null)
                     imageLink = response.body()?.image?.named
-                colorFromAPI.text = imageLink
+//                colorFromAPI.text = imageLink
                 webV_APIshape.loadUrl(imageLink)
             }
         })
