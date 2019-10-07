@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.GridLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.shapesandcolors.model.*
 import kotlinx.android.synthetic.main.activity_ar.*
 import kotlinx.android.synthetic.main.activity_fetch_image.*
@@ -44,8 +46,12 @@ class FetchImageActivity : AppCompatActivity() {
         val adapter = ColorListAdapter(this, GlobalModel.colors)
         listView_colors.adapter = adapter
 
+        recyclerV_colors_grid.layoutManager = GridLayoutManager(this,3 )
+        recyclerV_colors_grid.adapter = ColorsAdapter(GlobalModel.colors)
+
         val selectedColorObject = colorOjects.random()
         imgV_colorObject.setImageResource(selectedColorObject)
+
 
         listView_colors.setOnItemClickListener { _, _, position, _ ->
             fetchColorFromAPI(GlobalModel.colors[position].hex)

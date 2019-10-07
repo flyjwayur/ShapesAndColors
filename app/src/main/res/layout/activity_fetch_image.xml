@@ -40,8 +40,18 @@
             android:layout_width="200sp"
             android:layout_height="200sp"
             android:layout_gravity="center_horizontal|center_vertical">
+
         </WebView>
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerV_colors_grid"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="6dp"
+        tools:itemCount="8"
+        tools:listitem="@layout/grid_view_color_item"
+        />
 
     <ListView
         android:id="@+id/listView_colors"
