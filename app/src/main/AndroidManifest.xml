@@ -3,7 +3,8 @@
     package="com.example.shapesandcolors">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-feature android:name="android.hardware.camera.ar" />
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -18,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MediaInputActivity"></activity>
+        <activity android:name=".FetchImageDetailActivity"></activity>
         <activity android:name=".ArActivity" />
         <activity android:name=".FetchImageActivity" />
         <activity android:name=".PlayActivity" />
