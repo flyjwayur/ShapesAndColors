@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.shapesandcolors.model.*
+import kotlinx.android.synthetic.main.activity_ar.*
 import kotlinx.android.synthetic.main.activity_fetch_image.*
 import retrofit2.Call
 import retrofit2.Response
@@ -23,6 +24,17 @@ class FetchImageActivity : AppCompatActivity() {
     private val queryService = QueryApiService()
     //Image URL from Color API to fetch color square
     private var imageLink: String? = null
+    val colorOjects: Array<Int> =
+        arrayOf(
+            R.drawable.apple,
+            R.drawable.fish,
+            R.drawable.sun,
+            R.drawable.oranges,
+            R.drawable.watermelon,
+            R.drawable.eggplant,
+            R.drawable.tire,
+            R.drawable.snowman
+        )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +43,9 @@ class FetchImageActivity : AppCompatActivity() {
 
         val adapter = ColorListAdapter(this, GlobalModel.colors)
         listView_colors.adapter = adapter
+
+        val selectedColorObject = colorOjects.random()
+        imgV_colorObject.setImageResource(selectedColorObject)
 
         listView_colors.setOnItemClickListener { _, _, position, _ ->
             fetchColorFromAPI(GlobalModel.colors[position].hex)
