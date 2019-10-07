@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ShapesAndColors</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="colorGame_imageExample">Example image</string>
 </resources>
