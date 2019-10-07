@@ -26,10 +26,23 @@
     <ListView
         android:id="@+id/listView_colors"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="350dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
+
+    <WebView
+        android:id="@+id/webV_APIshape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imgV_APIshape"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@mipmap/ic_launcher" />
 
 </LinearLayout>

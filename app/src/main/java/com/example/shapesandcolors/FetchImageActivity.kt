@@ -1,6 +1,8 @@
 package com.example.shapesandcolors
 
+
 import android.content.Context
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,11 +15,15 @@ import com.example.shapesandcolors.model.*
 import kotlinx.android.synthetic.main.activity_fetch_image.*
 import retrofit2.Call
 import retrofit2.Response
+import java.io.IOException
 
 
 class FetchImageActivity : AppCompatActivity() {
 
     private val queryService = QueryApiService()
+    //Image URL from Color API to fetch color square
+    private var imageLink: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +34,7 @@ class FetchImageActivity : AppCompatActivity() {
 
         listView_colors.setOnItemClickListener { _, _, position, _ ->
             fetchColorFromAPI(GlobalModel.colors[position].hex)
+            Log.d("after check Network", "$imageLink")
         }
 
         listView_colors.setOnItemLongClickListener { _, _, position, _ ->
@@ -47,10 +54,13 @@ class FetchImageActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<QueryResult>, response: Response<QueryResult>) {
                 if (response.body() != null)
-                    colorFromAPI.text = response.body()?.image?.named.toString()
+                    imageLink = response.body()?.image?.named
+                colorFromAPI.text = imageLink
+                webV_APIshape.loadUrl(imageLink)
             }
         })
     }
+
 
     private inner class ColorListAdapter(
         context: Context,
