@@ -9,4 +9,7 @@
     <string name="label">label</string>
     <string name="reset">Reset</string>
     <string name="save">Save</string>
+    <string name="y_axis">Y-Axis</string>
+    <string name="z_axis">Z-Axis</string>
+    <string name="x_axis">X-Axis</string>
 </resources>
