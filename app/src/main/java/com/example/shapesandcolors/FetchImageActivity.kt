@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.shapesandcolors.model.*
 import kotlinx.android.synthetic.main.activity_fetch_image.*
@@ -49,7 +50,7 @@ class FetchImageActivity : AppCompatActivity() {
             "What is a color of $keyOfselectedColorObject ? "
 
         button_check.setOnClickListener { it ->
-            var nameOfSelectedHex:String
+            var nameOfSelectedHex: String
 
             if (selectedHex !== null) {
                 nameOfSelectedHex =
@@ -60,6 +61,10 @@ class FetchImageActivity : AppCompatActivity() {
                 } else {
                     Log.d("TEST - false", "FALSE")
                 }
+            } else {
+                val toast =
+                    Toast.makeText(this, "Choose a color from color palette", Toast.LENGTH_SHORT)
+                toast.show()
             }
         }
     }
