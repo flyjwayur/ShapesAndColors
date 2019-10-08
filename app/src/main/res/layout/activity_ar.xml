@@ -17,6 +17,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/imv_scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -24,61 +25,61 @@
 
             <ImageView
                 android:id="@+id/imv_circle"
-                android:src="@drawable/circle2"
+                android:src="@drawable/circle"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+            <ImageView
+                android:id="@+id/imv_diamond"
+                android:src="@drawable/diamond"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
 
             <ImageView
                 android:id="@+id/imv_heart"
-                android:src="@drawable/heart2"
+                android:src="@drawable/heart"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
 
             <ImageView
                 android:id="@+id/imv_hexagon"
-                android:src="@drawable/hexagon2"
+                android:src="@drawable/hexagon"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
 
             <ImageView
-                android:id="@+id/imv_circle2"
-                android:src="@drawable/circle2"
+                android:id="@+id/imv_octagon"
+                android:src="@drawable/octagon"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
 
             <ImageView
-                android:id="@+id/imv_heart2"
-                android:src="@drawable/heart2"
+                android:id="@+id/imv_oval"
+                android:src="@drawable/oval"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
 
             <ImageView
-                android:id="@+id/imv_hexagon2"
-                android:src="@drawable/hexagon2"
+                android:id="@+id/imv_rectangle"
+                android:src="@drawable/rectangle"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
 
             <ImageView
-                android:id="@+id/imv_circle3"
-                android:src="@drawable/circle2"
+                android:id="@+id/imv_square"
+                android:src="@drawable/square"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
 
             <ImageView
-                android:id="@+id/imv_heart3"
-                android:src="@drawable/heart2"
+                android:id="@+id/imv_star"
+                android:src="@drawable/star"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
 
             <ImageView
-                android:id="@+id/imv_hexagon3"
-                android:src="@drawable/hexagon2"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
-
-            <ImageView
-                android:id="@+id/imv_circle4"
-                android:src="@drawable/circle2"
+                android:id="@+id/imv_triangle"
+                android:src="@drawable/triangle"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
         </LinearLayout>
