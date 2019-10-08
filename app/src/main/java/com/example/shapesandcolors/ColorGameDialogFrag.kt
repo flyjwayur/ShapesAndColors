@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_fetch_image.*
 /**
  * A simple [Fragment] subclass.
  */
-class ColorGameDialogFrag : DialogFragment() {
+class ColorGameDialogFrag() : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         var builder = AlertDialog.Builder(activity)
@@ -28,12 +28,12 @@ class ColorGameDialogFrag : DialogFragment() {
 
     inner class DialogListener : DialogInterface.OnClickListener{
         override fun onClick(dialog: DialogInterface?, which: Int) {
-            var main_activity = activity as FetchImageActivity
+            var fetch_image_activity = activity as FetchImageActivity
 
             when(which){
                 DialogInterface.BUTTON_POSITIVE -> {
-                    main_activity.textV_colorGameDesc2.text = "Awesome! Let's find a color of the image"
-                    main_activity.shuffleImage()
+                    fetch_image_activity.textV_colorGameDesc2.text = "Awesome! Let's find a color of the image"
+                    fetch_image_activity.shuffleImage()
                 }
             }
         }

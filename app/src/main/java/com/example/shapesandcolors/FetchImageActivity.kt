@@ -42,7 +42,7 @@ class FetchImageActivity : AppCompatActivity() {
         //Shuffle images for a color game
         shuffleImage()
 
-        imgV_colorObject.setImageResource(srcOfselectedColorObject!!)
+        imgV_colorObject.setImageResource(shuffleImage()!!)
         textV_colorGameDesc2.text =
             "What is a color of $keyOfselectedColorObject ? "
 
@@ -81,11 +81,12 @@ class FetchImageActivity : AppCompatActivity() {
         colorImageObjects["Snowman"] = ColorImageData("white", R.drawable.snowman)
     }
 
-    fun shuffleImage(){
+    fun shuffleImage():Int?{
         keyOfselectedColorObject = colorImageObjects.keys.random()
         val valueOfSelectedColorObject = colorImageObjects[keyOfselectedColorObject]
         colorOfselectedColorObject = valueOfSelectedColorObject!!.color
         srcOfselectedColorObject = valueOfSelectedColorObject!!.imgSrc
+        return srcOfselectedColorObject
     }
 
     private fun fetchColorFromAPI(hex: String) {
