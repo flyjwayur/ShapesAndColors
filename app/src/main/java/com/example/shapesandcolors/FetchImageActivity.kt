@@ -1,16 +1,10 @@
 package com.example.shapesandcolors
 
 
-import android.content.Context
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.shapesandcolors.model.*
@@ -27,6 +21,9 @@ class FetchImageActivity : AppCompatActivity() {
     private var imageLink: String? = null
     private var selectedHex: String? = null
     val colorImageObjects: HashMap<String, ColorImageData> = HashMap()
+    private lateinit var keyOfselectedColorObject:String
+    private lateinit var colorOfselectedColorObject:String
+    private var srcOfselectedColorObject:Int? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,12 +39,10 @@ class FetchImageActivity : AppCompatActivity() {
         //Add values to the colorImageObjects hashmap
         addValuesToColorImageObjects()
 
-        val keyOfselectedColorObject = colorImageObjects.keys.random()
-        val valueOfSelectedColorObject = colorImageObjects[keyOfselectedColorObject]
-        val colorOfselectedColorObject = valueOfSelectedColorObject!!.color
-        val srcOfselectedColorObject = valueOfSelectedColorObject!!.imgSrc
+        //Shuffle images for a color game
+        shuffleImage()
 
-        imgV_colorObject.setImageResource(srcOfselectedColorObject)
+        imgV_colorObject.setImageResource(srcOfselectedColorObject!!)
         textV_colorGameDesc2.text =
             "What is a color of $keyOfselectedColorObject ? "
 
@@ -60,8 +55,12 @@ class FetchImageActivity : AppCompatActivity() {
                 Log.d("TEST", nameOfSelectedHex)
                 if (colorOfselectedColorObject === nameOfSelectedHex) {
                     Log.d("TEST -true", "TRUE")
+                    var dialog = ColorGameDialogFrag()
+                    dialog.show(supportFragmentManager, "dialog")
                 } else {
                     Log.d("TEST - false", "FALSE")
+                    textV_colorGameDesc2.text =
+                        "Let's try to find the color of $keyOfselectedColorObject once more"
                 }
             } else {
                 val toast =
@@ -80,6 +79,13 @@ class FetchImageActivity : AppCompatActivity() {
         colorImageObjects["Eggplant"] = ColorImageData("purple", R.drawable.eggplant)
         colorImageObjects["Tire"] = ColorImageData("black", R.drawable.tire)
         colorImageObjects["Snowman"] = ColorImageData("white", R.drawable.snowman)
+    }
+
+    fun shuffleImage(){
+        keyOfselectedColorObject = colorImageObjects.keys.random()
+        val valueOfSelectedColorObject = colorImageObjects[keyOfselectedColorObject]
+        colorOfselectedColorObject = valueOfSelectedColorObject!!.color
+        srcOfselectedColorObject = valueOfSelectedColorObject!!.imgSrc
     }
 
     private fun fetchColorFromAPI(hex: String) {
