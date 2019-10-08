@@ -4,45 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".FetchImageActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/colorFromAPI"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="color from API"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
 
-    <ListView
-        android:id="@+id/listView_colors"
-        android:layout_width="wrap_content"
-        android:layout_height="350dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/textV_colorGameDesc2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center|center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorDarkGrey"
+                android:textStyle="bold"
+                android:fontFamily="serif-monospace"/>
+        </LinearLayout>
 
-    </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300sp"
+            android:layout_gravity="center"
+            android:background="@color/colorPastelYellow"
+            android:orientation="horizontal">
 
-    <WebView
-        android:id="@+id/webV_APIshape"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/imgV_colorObject"
+                android:layout_width="200sp"
+                android:layout_height="200sp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="4dp"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@string/colorGame_imageExample"
+                app:srcCompat="@mipmap/ic_launcher" />
 
-    <ImageView
-        android:id="@+id/imgV_APIshape"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:srcCompat="@mipmap/ic_launcher" />
+            <WebView
+                android:id="@+id/webV_APIshape"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:autofillHints="@string/color_coming"></WebView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerV_colors_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/colorPastelBlue"
+                    android:padding="6dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:itemCount="8"
+                    tools:listitem="@layout/grid_view_color_item" />
+
+                <Button
+                    android:id="@+id/button_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70sp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/rounded_corner"
+                    android:text="@string/color_check"
+                    android:textColor="@color/colorLightGrey"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerV_colors_grid"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/recyclerV_colors_grid" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
