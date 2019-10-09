@@ -6,12 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.shapesandcolors.ColorsAdapter
 import com.example.shapesandcolors.R
-import com.example.shapesandcolors.game.apiModel.ColorImageData
 import com.example.shapesandcolors.game.apiModel.GlobalModel
 import com.example.shapesandcolors.game.apiModel.QueryApiService
 import com.example.shapesandcolors.game.apiModel.QueryResult
@@ -19,7 +16,6 @@ import com.example.shapesandcolors.game.gameModel.GameViewModel
 import kotlinx.android.synthetic.main.activity_fetch_image.*
 import retrofit2.Call
 import retrofit2.Response
-import kotlin.collections.HashMap
 
 
 class FetchImageActivity : AppCompatActivity() {

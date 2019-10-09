@@ -1,4 +1,4 @@
-package com.example.shapesandcolors
+package com.example.shapesandcolors.game
 
 import android.content.Context
 import android.graphics.Color
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shapesandcolors.R
 import com.example.shapesandcolors.game.apiModel.ColorData
 import com.example.shapesandcolors.game.apiModel.GlobalModel
 import kotlinx.android.synthetic.main.grid_view_color_item.view.*
