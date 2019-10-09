@@ -1,4 +1,4 @@
-package com.example.shapesandcolors.model
+package com.example.shapesandcolors.game.apiModel
 
 import retrofit2.Call
 import retrofit2.http.GET

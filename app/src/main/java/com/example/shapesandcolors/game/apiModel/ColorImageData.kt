@@ -1,4 +1,4 @@
-package com.example.shapesandcolors.model
+package com.example.shapesandcolors.game.apiModel
 
 class ColorImageData(var color:String, var imgSrc:Int) {
     override fun toString():String {
