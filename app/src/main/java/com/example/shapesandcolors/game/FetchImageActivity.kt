@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.shapesandcolors.ColorsAdapter
 import com.example.shapesandcolors.R
@@ -13,7 +15,7 @@ import com.example.shapesandcolors.game.apiModel.ColorImageData
 import com.example.shapesandcolors.game.apiModel.GlobalModel
 import com.example.shapesandcolors.game.apiModel.QueryApiService
 import com.example.shapesandcolors.game.apiModel.QueryResult
-import com.example.shapesandcolors.model.*
+import com.example.shapesandcolors.game.gameModel.GameViewModel
 import kotlinx.android.synthetic.main.activity_fetch_image.*
 import retrofit2.Call
 import retrofit2.Response
@@ -23,14 +25,8 @@ import kotlin.collections.HashMap
 class FetchImageActivity : AppCompatActivity() {
 
     private val queryService = QueryApiService()
-    //Image URL from Color API to fetch color square
-    private var imageLink: String? = null
-    private var selectedHex: String? = null
-    val colorImageObjects: HashMap<String, ColorImageData> = HashMap()
-    private lateinit var keyOfselectedColorObject:String
-    private lateinit var colorOfselectedColorObject:String
-    private var srcOfselectedColorObject:Int? = null
 
+    private lateinit var viewModel: GameViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,31 +41,32 @@ class FetchImageActivity : AppCompatActivity() {
                 this,
                 { hexItem -> fetchColorFromAPI(hexItem) })
 
-        //Add values to the colorImageObjects hashmap
-        addValuesToColorImageObjects()
 
-        //Shuffle images for a color game
-        shuffleImage()
+        Log.i("GameActivity", "Called ViewModelProviders.of")
+        // Life Cycle will create game viewModel instance for us
+        viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
-        imgV_colorObject.setImageResource(shuffleImage()!!)
+        //Set the image to image view and name of the color object to game description
+        imgV_colorObject.setImageResource(viewModel.shuffleImage()!!)
         textV_colorGameDesc2.text =
-            "What is a color of $keyOfselectedColorObject ? "
+            "What is a color of ${viewModel.keyOfselectedColorObject} ? "
 
         button_check.setOnClickListener { it ->
             var nameOfSelectedHex: String
 
-            if (selectedHex !== null) {
+            if (viewModel.selectedHex !== null) {
                 nameOfSelectedHex =
-                    GlobalModel.colors.filter { it -> it.hex === selectedHex }.first().name
+                    GlobalModel.colors.filter { it -> it.hex === viewModel.selectedHex }.first()
+                        .name
                 Log.d("TEST", nameOfSelectedHex)
-                if (colorOfselectedColorObject === nameOfSelectedHex) {
+                if (viewModel.colorOfselectedColorObject === nameOfSelectedHex) {
                     Log.d("TEST -true", "TRUE")
                     var dialog = ColorGameDialogFrag()
                     dialog.show(supportFragmentManager, "dialog")
                 } else {
                     Log.d("TEST - false", "FALSE")
                     textV_colorGameDesc2.text =
-                        "Let's try to find the color of $keyOfselectedColorObject once more"
+                        "Let's try to find the color of ${viewModel.keyOfselectedColorObject} once more"
                 }
             } else {
                 val toast =
@@ -79,51 +76,8 @@ class FetchImageActivity : AppCompatActivity() {
         }
     }
 
-    private fun addValuesToColorImageObjects() {
-        colorImageObjects["Apple"] = ColorImageData(
-            "red",
-            R.drawable.apple
-        )
-        colorImageObjects["Fish"] = ColorImageData(
-            "blue",
-            R.drawable.fish
-        )
-        colorImageObjects["Sun"] = ColorImageData(
-            "yellow",
-            R.drawable.sun
-        )
-        colorImageObjects["Orange"] = ColorImageData(
-            "orange",
-            R.drawable.oranges
-        )
-        colorImageObjects["Watermelon"] = ColorImageData(
-            "green",
-            R.drawable.watermelon
-        )
-        colorImageObjects["Eggplant"] = ColorImageData(
-            "purple",
-            R.drawable.eggplant
-        )
-        colorImageObjects["Tire"] = ColorImageData(
-            "black",
-            R.drawable.tire
-        )
-        colorImageObjects["Snowman"] = ColorImageData(
-            "white",
-            R.drawable.snowman
-        )
-    }
-
-    fun shuffleImage():Int?{
-        keyOfselectedColorObject = colorImageObjects.keys.random()
-        val valueOfSelectedColorObject = colorImageObjects[keyOfselectedColorObject]
-        colorOfselectedColorObject = valueOfSelectedColorObject!!.color
-        srcOfselectedColorObject = valueOfSelectedColorObject!!.imgSrc
-        return srcOfselectedColorObject
-    }
-
     private fun fetchColorFromAPI(hex: String) {
-        selectedHex = hex
+        viewModel.selectedHex = hex
         val call: Call<QueryResult> = queryService.getQuery(hex)
         call.enqueue(object : retrofit2.Callback<QueryResult> {
             override fun onFailure(call: Call<QueryResult>, t: Throwable) {
@@ -132,9 +86,19 @@ class FetchImageActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<QueryResult>, response: Response<QueryResult>) {
                 if (response.body() != null)
-                    imageLink = response.body()?.image?.named
-                webV_APIshape.loadUrl(imageLink)
+                    viewModel.imageLink = response.body()?.image?.named
+                webV_APIshape.loadUrl(viewModel.imageLink)
             }
         })
+    }
+
+    fun updateImage() {
+        imgV_colorObject.setImageResource(viewModel.shuffleImage()!!)
+
+    }
+    
+    fun updateDescText(){
+        textV_colorGameDesc2.text =
+            "What is a color of ${viewModel.keyOfselectedColorObject} ? "
     }
 }
