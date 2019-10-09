@@ -8,7 +8,7 @@ import android.os.Environment
 import java.io.*
 
 
-class RecordAudio(val context: Context, val activity: MainActivity, var recFile: File): Runnable{
+class RecordAudio(val context: Context, val activity: MediaInputActivity, var recFile: File): Runnable{
     var recRunning =true
 
     override fun run() {

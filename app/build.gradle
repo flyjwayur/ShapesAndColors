@@ -47,6 +47,9 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation "org.jetbrains.anko:anko:$anko_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
 }
 
 
