@@ -86,6 +86,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
             createModel(anchorNode, selected)
         }
+
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -219,7 +221,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 diamond.renderable = diamondRenderable
                 diamond.select()
 
-                addShapeLabel(anchorNode, diamond, "Tap to name", selected)
+                addShapeLabel(anchorNode, diamond, "diamond", selected)
             }
             3 -> {
                 val heart = TransformableNode(fragment.transformationSystem)
@@ -305,13 +307,13 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
     private fun addShapeLabel(
         anchorNode: AnchorNode,
         node: TransformableNode,
         audiofile: String,
         id: Int
     ) {
+
         ViewRenderable.builder().setView(this, R.layout.label_layout)
             .build()
             .thenAccept { viewRenderable ->
@@ -409,7 +411,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 checkLabel.setOnClickListener {
                     val index = id - 1
                     val recFileName = audioList[index].replace(".raw", "")
-                    val song = "android.resource://" + getPackageName() + "/raw/$recFileName"
+                    val song = "android.resource://" + packageName + "/raw/$recFileName"
 
                     if (mPlayer == null) {
                         mPlayer = MediaPlayer().apply {
