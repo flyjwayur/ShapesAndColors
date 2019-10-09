@@ -15,6 +15,8 @@ class GameViewModel: ViewModel(){
     lateinit var colorOfselectedColorObject:String
     var srcOfselectedColorObject:Int? = null
     val gameGuideMessages:ArrayList<String> = arrayListOf()
+    // The current score
+    var score:Int = 0
 
     init {
         Log.i("GameViewModel", "GameViewModel created")
@@ -79,6 +81,10 @@ class GameViewModel: ViewModel(){
         colorOfselectedColorObject = valueOfSelectedColorObject!!.color
         srcOfselectedColorObject = valueOfSelectedColorObject!!.imgSrc
         return srcOfselectedColorObject
+    }
+
+    fun AddScore() {
+        score++
     }
 
 }

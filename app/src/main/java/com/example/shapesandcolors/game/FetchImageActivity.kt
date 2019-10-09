@@ -51,6 +51,7 @@ class FetchImageActivity : AppCompatActivity() {
         textV_colorGameDesc2.text =
             "What is a color of ${viewModel.keyOfselectedColorObject} ? "
 
+        textV_score.text = "Score: ${viewModel.score}"
         button_check.setOnClickListener { it ->
             var nameOfSelectedHex: String
 
@@ -60,7 +61,8 @@ class FetchImageActivity : AppCompatActivity() {
                         .name
 
                 if (viewModel.colorOfselectedColorObject === nameOfSelectedHex) {
-
+                    viewModel.AddScore()
+                    updateScoreText()
                     var dialog = ColorGameDialogFrag()
                     dialog.show(supportFragmentManager, "dialog")
                 } else {
@@ -101,5 +103,9 @@ class FetchImageActivity : AppCompatActivity() {
     fun updateDescText() {
         textV_colorGameDesc2.text =
             "What is a color of ${viewModel.keyOfselectedColorObject} ? "
+    }
+
+    fun updateScoreText(){
+        textV_score.text = "Score: ${viewModel.score}"
     }
 }

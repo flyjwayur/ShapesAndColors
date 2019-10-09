@@ -20,9 +20,12 @@ class ColorGameDialogFrag : DialogFragment() {
     private lateinit var viewModel: GameViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        var fetch_image_activity = activity as FetchImageActivity
+        viewModel = ViewModelProviders.of(fetch_image_activity).get(GameViewModel::class.java)
         var builder = AlertDialog.Builder(activity)
         builder.setTitle("Yeahy! Wonderful!")
-        builder.setMessage("Color is matching well :D")
+        builder.setMessage("Color is matching well :D. \n" +
+                "Youre score will increase by 1.\n Now, it is ${viewModel.score}.")
 
         var listener = DialogListener()
         builder.setPositiveButton("Play more", listener)
@@ -34,11 +37,10 @@ class ColorGameDialogFrag : DialogFragment() {
     inner class DialogListener : DialogInterface.OnClickListener{
         override fun onClick(dialog: DialogInterface?, which: Int) {
             var fetch_image_activity = activity as FetchImageActivity
-
             when(which){
                 DialogInterface.BUTTON_POSITIVE -> {
 //                    fetch_image_activity.textV_colorGameDesc2.text = "Awesome! Let's find a color of the image"
-                    viewModel = ViewModelProviders.of(fetch_image_activity).get(GameViewModel::class.java)
+
                     viewModel.shuffleImage()
                     fetch_image_activity.updateImage()
                     fetch_image_activity.updateDescText()
