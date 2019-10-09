@@ -101,10 +101,10 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="32dp"
         android:backgroundTint="@color/colorPrimary"
-        android:text="@string/reset"
+        android:text="Cancel"
         android:textSize="24sp"
         app:cornerRadius="10dp"
-        app:icon="@drawable/ic_cancel"
+        app:icon="@drawable/ic_cancel_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputEditText"
         app:rippleColor="@color/colorAccent" />

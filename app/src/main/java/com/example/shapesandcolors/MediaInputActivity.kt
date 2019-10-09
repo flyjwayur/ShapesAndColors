@@ -13,6 +13,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
 
+
 class MediaInputActivity : AppCompatActivity() {
 
     lateinit var audioFile: File
@@ -58,8 +59,10 @@ class MediaInputActivity : AppCompatActivity() {
             stopRecording()
         }
 
+
         btn_save.setOnClickListener { onSaveMedia(it) }
         btn_cancel.setOnClickListener { onCancelMedia(it) }
+
     }
 
     private fun recordSound() {

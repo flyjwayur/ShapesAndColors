@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.activity_media_input.view.*
 
 private const val ARG1 = "param1"
 
-class MediaFragment: Fragment() {
 
+class MediaFragment: Fragment() {
     private lateinit var viewOfFragment: View
     private var param1: Int? = null
 
@@ -29,6 +29,7 @@ class MediaFragment: Fragment() {
 
         viewOfFragment.btn_save.setOnClickListener { onSaveMedia(it) }
         viewOfFragment.btn_cancel.setOnClickListener { onCancelMedia(it) }
+
         return  viewOfFragment
     }
 
@@ -37,6 +38,7 @@ class MediaFragment: Fragment() {
         fun newInstance(param1: Int): MediaFragment {
             val args: Bundle = Bundle()
             args.putInt(ARG1,param1)
+
             val fragment = MediaFragment()
             fragment.arguments = args
             return fragment

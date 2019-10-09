@@ -7,6 +7,7 @@ import android.media.MediaRecorder
 import android.os.Environment
 import java.io.*
 
+
 class RecordAudio(val context: Context, val activity: MediaInputActivity, var recFile: File): Runnable{
     var recRunning =true
 
@@ -21,13 +22,14 @@ class RecordAudio(val context: Context, val activity: MediaInputActivity, var re
         }
 
         try{
-
             val outputStream = FileOutputStream(recFile)
             val bufferedOutputStream = BufferedOutputStream(outputStream)
             val dataOutputStream = DataOutputStream(bufferedOutputStream)
+
             val minBufferSize = AudioRecord.getMinBufferSize(44100,
                 AudioFormat.CHANNEL_OUT_STEREO,
                 AudioFormat.ENCODING_PCM_16BIT)
+
             val aFormat = AudioFormat.Builder()
                 .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
                 .setSampleRate(44100)
@@ -42,12 +44,14 @@ class RecordAudio(val context: Context, val activity: MediaInputActivity, var re
             recorder.startRecording()
             while (recRunning) {
                 val numofBytes = recorder.read(audioData, 0, minBufferSize)
+
                 if(numofBytes>0) {
                     dataOutputStream.write(audioData)
                 }
             }
             recorder.stop()
             dataOutputStream.close()
+
         }catch (ex: IOException){
             ex.printStackTrace()
         }
