@@ -63,7 +63,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_ar)
 
         if (savedInstanceState != null) {
-            fragment = supportFragmentManager.getFragment(
+            fragment = getSupportFragmentManager().getFragment(
                 savedInstanceState,
                 "arFragment"
             ) as ArFragment
@@ -93,7 +93,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //Save the fragment's instance
-        supportFragmentManager.putFragment(outState, "arFragment", fragment)
+        getSupportFragmentManager().putFragment(outState, "arFragment", fragment)
     }
 
     private fun setUpClickListener() {
@@ -324,6 +324,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 labelView.select()
 
                 val textLabel = viewRenderable.view as TextView
+                textLabel.text = label // set's the text according to the label parsed
 
                 // Label text resource
                 val index = id - 1
@@ -360,6 +361,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 // Audio resource values
                 playLabel.setOnClickListener {
+
                     val index = id - 1
                     val recFileName = audioList[index]
                     val storageDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
@@ -407,7 +409,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 val checkLabel = viewRenderable.view as Button
 
-                // Audio for correct shape and color
+                // Audio resource values
                 checkLabel.setOnClickListener {
                     val index = id - 1
                     val recFileName = audioList[index].replace(".raw", "")
@@ -428,4 +430,5 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
     }
+
 }

@@ -8,30 +8,28 @@ import android.os.Environment
 import java.io.*
 
 
-class RecordAudio(val context: Context, val activity: MediaInputActivity, var recFile: File) :
-    Runnable {
-    var recRunning = true
+class RecordAudio(val context: Context, val activity: MediaInputActivity, var recFile: File): Runnable{
+    var recRunning =true
 
     override fun run() {
 
         val recFileName = "testRecorded.raw"
         val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
         try {
-            val recFile = File(storageDir.toString() + "/" + recFileName)
+            val recFile = File(storageDir.toString() + "/"+ recFileName)
         } catch (ex: IOException) {
             // Error occurred while creating the File
         }
 
-        try {
-
+        try{
             val outputStream = FileOutputStream(recFile)
             val bufferedOutputStream = BufferedOutputStream(outputStream)
             val dataOutputStream = DataOutputStream(bufferedOutputStream)
-            val minBufferSize = AudioRecord.getMinBufferSize(
-                44100,
+
+            val minBufferSize = AudioRecord.getMinBufferSize(44100,
                 AudioFormat.CHANNEL_OUT_STEREO,
-                AudioFormat.ENCODING_PCM_16BIT
-            )
+                AudioFormat.ENCODING_PCM_16BIT)
+
             val aFormat = AudioFormat.Builder()
                 .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
                 .setSampleRate(44100)
@@ -46,13 +44,15 @@ class RecordAudio(val context: Context, val activity: MediaInputActivity, var re
             recorder.startRecording()
             while (recRunning) {
                 val numofBytes = recorder.read(audioData, 0, minBufferSize)
-                if (numofBytes > 0) {
+
+                if(numofBytes>0) {
                     dataOutputStream.write(audioData)
                 }
             }
             recorder.stop()
             dataOutputStream.close()
-        } catch (ex: IOException) {
+
+        }catch (ex: IOException){
             ex.printStackTrace()
         }
 
