@@ -1,4 +1,4 @@
-package com.example.shapesandcolors
+package com.example.shapesandcolors.game
 
 
 import android.content.pm.ActivityInfo
@@ -7,6 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.shapesandcolors.ColorsAdapter
+import com.example.shapesandcolors.R
+import com.example.shapesandcolors.game.apiModel.ColorImageData
+import com.example.shapesandcolors.game.apiModel.GlobalModel
+import com.example.shapesandcolors.game.apiModel.QueryApiService
+import com.example.shapesandcolors.game.apiModel.QueryResult
 import com.example.shapesandcolors.model.*
 import kotlinx.android.synthetic.main.activity_fetch_image.*
 import retrofit2.Call
@@ -34,7 +40,10 @@ class FetchImageActivity : AppCompatActivity() {
         //Display a color palette with a recycler + grid view
         recyclerV_colors_grid.layoutManager = GridLayoutManager(this, 3)
         recyclerV_colors_grid.adapter =
-            ColorsAdapter(GlobalModel.colors, this, { hexItem -> fetchColorFromAPI(hexItem) })
+            ColorsAdapter(
+                GlobalModel.colors,
+                this,
+                { hexItem -> fetchColorFromAPI(hexItem) })
 
         //Add values to the colorImageObjects hashmap
         addValuesToColorImageObjects()
@@ -71,14 +80,38 @@ class FetchImageActivity : AppCompatActivity() {
     }
 
     private fun addValuesToColorImageObjects() {
-        colorImageObjects["Apple"] = ColorImageData("red", R.drawable.apple)
-        colorImageObjects["Fish"] = ColorImageData("blue", R.drawable.fish)
-        colorImageObjects["Sun"] = ColorImageData("yellow", R.drawable.sun)
-        colorImageObjects["Orange"] = ColorImageData("orange", R.drawable.oranges)
-        colorImageObjects["Watermelon"] = ColorImageData("green", R.drawable.watermelon)
-        colorImageObjects["Eggplant"] = ColorImageData("purple", R.drawable.eggplant)
-        colorImageObjects["Tire"] = ColorImageData("black", R.drawable.tire)
-        colorImageObjects["Snowman"] = ColorImageData("white", R.drawable.snowman)
+        colorImageObjects["Apple"] = ColorImageData(
+            "red",
+            R.drawable.apple
+        )
+        colorImageObjects["Fish"] = ColorImageData(
+            "blue",
+            R.drawable.fish
+        )
+        colorImageObjects["Sun"] = ColorImageData(
+            "yellow",
+            R.drawable.sun
+        )
+        colorImageObjects["Orange"] = ColorImageData(
+            "orange",
+            R.drawable.oranges
+        )
+        colorImageObjects["Watermelon"] = ColorImageData(
+            "green",
+            R.drawable.watermelon
+        )
+        colorImageObjects["Eggplant"] = ColorImageData(
+            "purple",
+            R.drawable.eggplant
+        )
+        colorImageObjects["Tire"] = ColorImageData(
+            "black",
+            R.drawable.tire
+        )
+        colorImageObjects["Snowman"] = ColorImageData(
+            "white",
+            R.drawable.snowman
+        )
     }
 
     fun shuffleImage():Int?{

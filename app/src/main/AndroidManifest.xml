@@ -17,10 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ShapeAndColorTheme">
-        <activity android:name=".FetchImageDetailActivity"></activity>
+        <activity android:name=".game.FetchImageDetailActivity"></activity>
         <activity android:name=".MediaInputActivity"></activity>
         <activity android:name=".ArActivity" />
-        <activity android:name=".FetchImageActivity" />
+        <activity android:name=".game.FetchImageActivity" />
         <activity android:name=".PlayActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

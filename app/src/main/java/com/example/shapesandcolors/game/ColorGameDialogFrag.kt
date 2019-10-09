@@ -1,4 +1,4 @@
-package com.example.shapesandcolors
+package com.example.shapesandcolors.game
 
 
 import android.app.AlertDialog
@@ -7,6 +7,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.DialogFragment
+import com.example.shapesandcolors.game.FetchImageActivity
 import kotlinx.android.synthetic.main.activity_fetch_image.*
 
 /**

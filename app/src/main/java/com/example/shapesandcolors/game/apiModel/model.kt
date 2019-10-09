@@ -1,4 +1,4 @@
-package com.example.shapesandcolors.model
+package com.example.shapesandcolors.game.apiModel
 
 import com.google.gson.annotations.SerializedName
 

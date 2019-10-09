@@ -1,10 +1,11 @@
-package com.example.shapesandcolors
+package com.example.shapesandcolors.game
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.shapesandcolors.model.ColorData
+import com.example.shapesandcolors.R
+import com.example.shapesandcolors.game.apiModel.ColorData
 import kotlinx.android.synthetic.main.activity_fetch_image_detail.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +23,10 @@ class FetchImageDetailActivity : AppCompatActivity() {
 
             detailIntent.putExtra(EXTRA_TITLE, colorData.name)
             detailIntent.putExtra(EXTRA_TITLE, colorData.hex)
-            detailIntent.putExtra(EXTRA_URL, COLORAPI_URL)
+            detailIntent.putExtra(
+                EXTRA_URL,
+                COLORAPI_URL
+            )
 
             return detailIntent
         }
