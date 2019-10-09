@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_media_input.view.*
 
 private const val ARG1 = "param1"
 
-class MediaFragment: Fragment() {
+class MediaFragment : Fragment() {
 
     private lateinit var viewOfFragment: View
     private var param1: Int? = null
@@ -17,26 +17,27 @@ class MediaFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(arguments != null) {
+        if (arguments != null) {
             param1 = arguments!!.getInt(ARG1)
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle? ): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         viewOfFragment = inflater.inflate(R.layout.activity_media_input, container, false)
 
         viewOfFragment.btn_save.setOnClickListener { onSaveMedia(it) }
         viewOfFragment.btn_cancel.setOnClickListener { onCancelMedia(it) }
-        return  viewOfFragment
+        return viewOfFragment
     }
 
     companion object {
         @JvmStatic
         fun newInstance(param1: Int): MediaFragment {
             val args: Bundle = Bundle()
-            args.putInt(ARG1,param1)
+            args.putInt(ARG1, param1)
             val fragment = MediaFragment()
             fragment.arguments = args
             return fragment
@@ -50,6 +51,6 @@ class MediaFragment: Fragment() {
     private fun onCancelMedia(v: View?) {
         // code here
         // imv_scrollview.visibility = View.VISIBLE
-        getActivity()?.onBackPressed()
+        activity?.onBackPressed()
     }
 }
