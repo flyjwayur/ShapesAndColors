@@ -14,11 +14,13 @@ class GameViewModel: ViewModel(){
     lateinit var keyOfselectedColorObject:String
     lateinit var colorOfselectedColorObject:String
     var srcOfselectedColorObject:Int? = null
+    val gameGuideMessages:ArrayList<String> = arrayListOf()
 
     init {
         Log.i("GameViewModel", "GameViewModel created")
         //Add values to the colorImageObjects hashmap
         addValuesToColorImageObjects()
+        addGuideMessageToGameDescText()
 
         //Shuffle images for a color game
         shuffleImage()
@@ -62,6 +64,13 @@ class GameViewModel: ViewModel(){
             "white",
             R.drawable.snowman
         )
+    }
+
+    private fun addGuideMessageToGameDescText(){
+        gameGuideMessages.add("Let's try once more")
+        gameGuideMessages.add("We can try another color?")
+        gameGuideMessages.add("How about choosing another color?")
+        gameGuideMessages.add("You're almost there")
     }
 
     fun shuffleImage():Int?{

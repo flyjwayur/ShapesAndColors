@@ -58,15 +58,16 @@ class FetchImageActivity : AppCompatActivity() {
                 nameOfSelectedHex =
                     GlobalModel.colors.filter { it -> it.hex === viewModel.selectedHex }.first()
                         .name
-                Log.d("TEST", nameOfSelectedHex)
+
                 if (viewModel.colorOfselectedColorObject === nameOfSelectedHex) {
-                    Log.d("TEST -true", "TRUE")
+
                     var dialog = ColorGameDialogFrag()
                     dialog.show(supportFragmentManager, "dialog")
                 } else {
-                    Log.d("TEST - false", "FALSE")
+                    //Provide a game guide message for encouragement
+                    val gameMessage = viewModel.gameGuideMessages.random()
                     textV_colorGameDesc2.text =
-                        "Let's try to find the color of ${viewModel.keyOfselectedColorObject} once more"
+                        "${gameMessage}"
                 }
             } else {
                 val toast =
@@ -96,8 +97,8 @@ class FetchImageActivity : AppCompatActivity() {
         imgV_colorObject.setImageResource(viewModel.shuffleImage()!!)
 
     }
-    
-    fun updateDescText(){
+
+    fun updateDescText() {
         textV_colorGameDesc2.text =
             "What is a color of ${viewModel.keyOfselectedColorObject} ? "
     }
