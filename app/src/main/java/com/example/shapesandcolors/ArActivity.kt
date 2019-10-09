@@ -1,48 +1,28 @@
 package com.example.shapesandcolors
 
-import android.content.Intent
 import android.graphics.Color
-import android.media.AudioManager
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.net.Uri
-import android.os.Environment
-import android.util.Log
-import android.widget.Button
-import android.widget.TextView
+import android.widget.Toast
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.TransformableNode
 import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_ar.*
 import com.google.ar.sceneform.math.Vector3
-import com.google.ar.sceneform.rendering.ViewRenderable
-import org.jetbrains.anko.toast
-import java.io.File
-import java.io.FileInputStream
-import java.io.IOException
+import com.google.ar.sceneform.math.Quaternion
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 
 
 
-
 class ArActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var file: File
     lateinit var arrayView : Array<View>
-    private var selected = 1 // chosen renderable by default
+    internal var selected = 1 // chosen renderable by default
     private lateinit var fragment: ArFragment
-    private var mPlayer: MediaPlayer? = null
-
-    private var label: String? = null
-    private val defaultShapeName = "Tap to name"
-    private val audioList = listOf("circle.raw", "diamond.raw", "heart.raw", "hexagon.raw", "octagon.raw",
-        "oval.raw", "rectangle.raw", "square.raw", "star.raw", "triangle.raw")
-    private val textFileList = listOf("circle.txt", "diamond.txt", "heart.txt", "hexagon.txt", "octagon.txt",
-        "oval.txt", "rectangle.txt", "square.txt", "star.txt", "triangle.txt")
 
     // Models
     private var circleRenderable: ModelRenderable? = null
@@ -60,17 +40,12 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ar)
 
-        if (savedInstanceState != null) {
-            fragment = getSupportFragmentManager().getFragment(savedInstanceState, "arFragment") as ArFragment
-        }
-
         arrayView = arrayOf(
-            imv_circle, imv_diamond, imv_heart, imv_hexagon, imv_octagon,
-            imv_oval, imv_rectangle, imv_square, imv_star, imv_triangle)
+            imv_circle, imv_heart, imv_hexagon, imv_circle2, imv_heart2,
+            imv_hexagon2, imv_circle3, imv_heart3, imv_hexagon3, imv_circle4)
 
         setUpClickListener()
         setUpModel()
-
 
         fragment = supportFragmentManager.findFragmentById(R.id.arimage_fragment) as ArFragment
         fragment.setOnTapArPlaneListener { hitResult, plane, motionEvent ->
@@ -81,13 +56,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
             createModel(anchorNode, selected)
         }
 
-
-    }
-
-    override fun onSaveInstanceState(outState : Bundle) {
-        super.onSaveInstanceState(outState)
-        //Save the fragment's instance
-        getSupportFragmentManager().putFragment(outState, "arFragment", fragment)
     }
 
     private fun setUpClickListener() {
@@ -103,39 +71,39 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 myBackground(view.id)
                 // Toast.makeText(this, "Image $selected", Toast.LENGTH_SHORT).show()
             }
-            R.id.imv_diamond -> {
+            R.id.imv_heart -> {
                 selected = 2
                 myBackground(view.id)
             }
-            R.id.imv_heart -> {
+            R.id.imv_hexagon -> {
                 selected = 3
                 myBackground(view.id)
             }
-            R.id.imv_hexagon -> {
+            R.id.imv_circle2 -> {
                 selected = 4
                 myBackground(view.id)
             }
-            R.id.imv_octagon -> {
+            R.id.imv_heart2 -> {
                 selected = 5
                 myBackground(view.id)
             }
-            R.id.imv_oval -> {
+            R.id.imv_hexagon2 -> {
                 selected = 6
                 myBackground(view.id)
             }
-            R.id.imv_rectangle -> {
+            R.id.imv_circle3 -> {
                 selected = 7
                 myBackground(view.id)
             }
-            R.id.imv_square -> {
+            R.id.imv_heart3 -> {
                 selected = 8
                 myBackground(view.id)
             }
-            R.id.imv_star -> {
+            R.id.imv_hexagon3 -> {
                 selected = 9
                 myBackground(view.id)
             }
-            R.id.imv_triangle -> {
+            R.id.imv_circle4 -> {
                 selected = 10
                 myBackground(view.id)
             }
@@ -204,8 +172,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 circle.setParent(anchorNode)
                 circle.renderable = circleRenderable
                 circle.select()
-
-                addShapeLabel(anchorNode, circle, "circle", selected)
             }
             2 -> {
                 val diamond = TransformableNode(fragment.transformationSystem)
@@ -214,8 +180,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 diamond.setParent(anchorNode)
                 diamond.renderable = diamondRenderable
                 diamond.select()
-
-                addShapeLabel(anchorNode, diamond, "diamond", selected)
             }
             3 -> {
                 val heart = TransformableNode(fragment.transformationSystem)
@@ -224,8 +188,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 heart.setParent(anchorNode)
                 heart.renderable = heartRenderable
                 heart.select()
-
-                addShapeLabel(anchorNode, heart, "heart", selected)
             }
             4 -> {
                 val hexagon = TransformableNode(fragment.transformationSystem)
@@ -234,8 +196,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 hexagon.setParent(anchorNode)
                 hexagon.renderable = hexagonRenderable
                 hexagon.select()
-
-                addShapeLabel(anchorNode, hexagon, "hexagon", selected)
             }
             5 -> {
                 val octagon = TransformableNode(fragment.transformationSystem)
@@ -244,8 +204,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 octagon.setParent(anchorNode)
                 octagon.renderable = octagonRenderable
                 octagon.select()
-
-                addShapeLabel(anchorNode, octagon, "octagon", selected)
             }
             6 -> {
                 val oval = TransformableNode(fragment.transformationSystem)
@@ -254,8 +212,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 oval.setParent(anchorNode)
                 oval.renderable = ovalRenderable
                 oval.select()
-
-                addShapeLabel(anchorNode, oval, "oval", selected)
             }
             7 -> {
                 val rectangle = TransformableNode(fragment.transformationSystem)
@@ -264,8 +220,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 rectangle.setParent(anchorNode)
                 rectangle.renderable = rectangleRenderable
                 rectangle.select()
-
-                addShapeLabel(anchorNode, rectangle, "rectangle", selected)
             }
             8 -> {
                 val square = TransformableNode(fragment.transformationSystem)
@@ -274,8 +228,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 square.setParent(anchorNode)
                 square.renderable = squareRenderable
                 square.select()
-
-                addShapeLabel(anchorNode, square, "square", selected)
             }
             9 -> {
                 val star = TransformableNode(fragment.transformationSystem)
@@ -284,8 +236,6 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 star.setParent(anchorNode)
                 star.renderable = starRenderable
                 star.select()
-
-                addShapeLabel(anchorNode, star, "star", selected)
             }
             10 -> {
                 val triangle = TransformableNode(fragment.transformationSystem)
@@ -295,123 +245,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 triangle.setParent(anchorNode)
                 triangle.renderable = triangleRenderable
                 triangle.select()
-
-                addShapeLabel(anchorNode, triangle, "triangle", selected)
             }
         }
-    }
-
-    private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, audiofile: String, id : Int) {
-
-        ViewRenderable.builder().setView(this, R.layout.label_layout)
-            .build()
-            .thenAccept { viewRenderable ->
-                val labelView = TransformableNode(fragment.transformationSystem)
-                labelView.localPosition = Vector3(0f, node.localPosition.y + 0.7f, 0f)
-                labelView.setParent(anchorNode)
-                labelView.renderable = viewRenderable
-                labelView.select()
-
-                val textLabel = viewRenderable.view as TextView
-
-                // Label text resource
-                val index = id - 1
-                val textFILE = textFileList[index]
-
-                if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-                    try {
-                        val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-                        val txtfile = File(dir, textFILE)
-                        textLabel.text = txtfile.readText()
-                    } catch (ex: IOException) {
-                        textLabel.text = defaultShapeName
-                        Log.d("ReadText", ex.toString())
-                    }
-                }
-
-                textLabel.setOnClickListener{
-                    val intent = Intent(this, MediaInputActivity::class.java)
-                    intent.putExtra("shapeSoundName", audiofile)
-                    startActivity(intent)
-                }
-            }
-        ViewRenderable.builder().setView(this, R.layout.play_button)
-            .build()
-            .thenAccept { viewRenderable ->
-                val labelView = TransformableNode(fragment.transformationSystem)
-                labelView.localPosition = Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.7f, 0f)
-                labelView.setParent(anchorNode)
-                labelView.renderable = viewRenderable
-                labelView.select()
-
-                val playLabel = viewRenderable.view as Button
-
-                // Audio resource values
-                playLabel.setOnClickListener {
-                    val index = id - 1
-                    val recFileName = audioList[index]
-                    val storageDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
-                    try {
-                        file = File(storageDir.toString() + "/"+ recFileName)
-                    } catch (ex: IOException) {
-                        toast("Create Audio file first")
-                    }
-
-                    try {
-                        val inputStream = FileInputStream(file)
-                        val myRunnable = PlayAudio(inputStream)
-                        val myThread = Thread(myRunnable)
-                        myThread.start()
-                    } catch (ex: IOException) {
-                        toast("Audio file not found")
-                    }
-                }
-            }
-        ViewRenderable.builder().setView(this, R.layout.cancel_button)
-            .build()
-            .thenAccept { viewRenderable ->
-                val labelView = TransformableNode(fragment.transformationSystem)
-                labelView.localPosition = Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.25f, 0f)
-                labelView.setParent(anchorNode)
-                labelView.renderable = viewRenderable
-                labelView.select()
-
-                val deleteLabel = viewRenderable.view as Button
-
-                deleteLabel.setOnClickListener {
-                    anchorNode.setParent(null)
-                }
-            }
-        ViewRenderable.builder().setView(this, R.layout.checkshape_button)
-            .build()
-            .thenAccept { viewRenderable ->
-                val labelView = TransformableNode(fragment.transformationSystem)
-                labelView.localPosition = Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.475f, 0f)
-                labelView.setParent(anchorNode)
-                labelView.renderable = viewRenderable
-                labelView.select()
-
-                val checkLabel = viewRenderable.view as Button
-
-                // Audio for correct shape and color
-                checkLabel.setOnClickListener {
-                    val index = id - 1
-                    val recFileName = audioList[index].replace(".raw", "")
-                    val song = "android.resource://" + getPackageName() + "/raw/$recFileName"
-
-                    if (mPlayer == null) {
-                        mPlayer = MediaPlayer().apply {
-                            setAudioStreamType(AudioManager.STREAM_MUSIC)
-                            setDataSource(applicationContext, Uri.parse(song))
-                            prepare()
-                            start()
-                        }
-                        mPlayer!!.setOnCompletionListener {
-                            mPlayer!!.release()
-                            mPlayer = null
-                        }
-                    }
-                }
-            }
     }
 }
