@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        //addReceiver()
+        addReceiver()
 
         button_ReceiverOn.setOnClickListener {
             var intent = Intent(this, MyReceiver::class.java)

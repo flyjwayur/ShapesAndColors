@@ -8,9 +8,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.shapesandcolors.game.FetchImageActivity
 import com.example.shapesandcolors.game.gameModel.GameViewModel
-import kotlinx.android.synthetic.main.activity_fetch_image.*
+
 
 /**
  * A simple [Fragment] subclass.
