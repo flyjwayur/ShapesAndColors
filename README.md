@@ -4,7 +4,7 @@ An enducational app for kids to learn shapes and colors :)
 It can be used as a tool to help kids to learn shapes and colors by a parent. 
 It includes AR, game and sensor page.
 
-# Main features 
+## Main features 
 - AR : 3D shapes, saving a name of a shape as text, recording a voice of shape name, checking shape names with exisiting audio files.
 - Game : Playing a color matching game (matching colors between an object in an image and input from color palette),
 Giving a feedback on the answer and score on the answer
@@ -18,7 +18,7 @@ Giving a feedback on the answer and score on the answer
 - Lifecycle
 - Material design (for theme)
 
-### Main features' symbols for a branch naming
+## Main features' symbols for a branch naming
 *ar : AR
 *api : Service(API, Network)
 *sn : Sensor
@@ -47,4 +47,6 @@ Copyright 2016 Hitomis, Inc.
   See the License for the specific language governing permissions and
   limitations under the License.
 
+
+Except Hitomis CircleMenu in our project, it is an opensource :D 
 
