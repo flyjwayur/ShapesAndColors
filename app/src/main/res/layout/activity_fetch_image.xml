@@ -18,12 +18,17 @@
             android:layout_margin="8dp"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/button_goBackHome"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:text="@string/home"
+                android:textColor="@color/colorDarkGrey"/>
+
             <TextView
                 android:id="@+id/textV_colorGameDesc2"
-                android:layout_width="550sp"
+                android:layout_width="500sp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:fontFamily="serif-monospace"
                 android:gravity="center|center_vertical"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -35,7 +40,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
                 android:fontFamily="serif-monospace"
                 android:gravity="center|center_vertical"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"

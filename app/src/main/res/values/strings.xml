@@ -13,4 +13,5 @@
     <string name="y_axis">Y-Axis</string>
     <string name="z_axis">Z-Axis</string>
     <string name="x_axis">X-Axis</string>
+    <string name="home">Home</string>
 </resources>

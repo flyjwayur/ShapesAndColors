@@ -8,7 +8,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.shapesandcolors.R
 import com.example.shapesandcolors.game.apiModel.GlobalModel
 import com.example.shapesandcolors.game.apiModel.QueryApiService
 import com.example.shapesandcolors.game.apiModel.QueryResult
@@ -16,6 +15,8 @@ import com.example.shapesandcolors.game.gameModel.GameViewModel
 import kotlinx.android.synthetic.main.activity_fetch_image.*
 import retrofit2.Call
 import retrofit2.Response
+import android.view.View
+import com.example.shapesandcolors.R
 
 
 class FetchImageActivity : AppCompatActivity() {
@@ -73,6 +74,14 @@ class FetchImageActivity : AppCompatActivity() {
                 toast.show()
             }
         }
+
+        button_goBackHome.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+
+                onBackPressed()
+
+            }
+        })
     }
 
     private fun fetchColorFromAPI(hex: String) {
