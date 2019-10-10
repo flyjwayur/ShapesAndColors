@@ -7,7 +7,9 @@ import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.shapesandcolors.ar.ArActivity
 import com.example.shapesandcolors.game.FetchImageActivity
+import com.example.shapesandcolors.sensor.PlayActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             .setOnMenuSelectedListener {
                 when(actList[it]) {
                     "Ar" -> {
-                        val intent = Intent(this, ArActivity :: class.java)
+                        val intent = Intent(this, ArActivity:: class.java)
                         startActivity(intent)
                     }
                     "FetchImage" -> {
@@ -36,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     "Play" -> {
-                        val intent = Intent(this, PlayActivity :: class.java)
+                        val intent = Intent(this, PlayActivity:: class.java)
                         startActivity(intent)
                     }
                 }

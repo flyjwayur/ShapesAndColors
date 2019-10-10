@@ -21,12 +21,10 @@
         android:theme="@style/ShapeAndColorMDTheme"
         android:networkSecurityConfig="@xml/network_security_config"
         >
-
-        <activity android:name=".game.FetchImageDetailActivity" />
-        <activity android:name=".MediaInputActivity" />
-        <activity android:name=".ArActivity" />
+        <activity android:name=".ar.MediaInputActivity" />
+        <activity android:name=".ar.ArActivity" />
         <activity android:name=".game.FetchImageActivity" />
-        <activity android:name=".PlayActivity" />
+        <activity android:name=".sensor.PlayActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

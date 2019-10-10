@@ -1,4 +1,4 @@
-package com.example.shapesandcolors
+package com.example.shapesandcolors.ar
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -24,8 +24,7 @@ import org.jetbrains.anko.toast
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
+import com.example.shapesandcolors.R
 
 
 class ArActivity : AppCompatActivity(), View.OnClickListener {
@@ -399,7 +398,9 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                     anchorNode.setParent(null)
                 }
             }
-        ViewRenderable.builder().setView(this, R.layout.checkshape_button)
+        ViewRenderable.builder().setView(this,
+            R.layout.checkshape_button
+        )
             .build()
             .thenAccept { viewRenderable ->
                 val labelView = TransformableNode(fragment.transformationSystem)
