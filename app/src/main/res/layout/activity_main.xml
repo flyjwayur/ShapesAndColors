@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="100sp"
             android:background="@color/colorPastelYellow"
+            android:fontFamily="serif-monospace"
             android:padding="30sp"
             android:text="@string/shapes_colors"
             android:textAlignment="center"
@@ -30,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="400sp"
             android:layout_gravity="top"
+            android:contentDescription="@string/main_menu_desc"
             android:padding="10sp" />
     </LinearLayout>
 

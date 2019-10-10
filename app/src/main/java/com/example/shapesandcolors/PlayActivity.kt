@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.activity_play.*
 
 class PlayActivity : AppCompatActivity(), SensorEventListener {
@@ -29,6 +30,13 @@ class PlayActivity : AppCompatActivity(), SensorEventListener {
         setContentView(R.layout.activity_play)
 
         sManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+
+        button_goBack.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+                onBackPressed()
+            }
+        })
     }
 
     private fun getAccelerometer(event: SensorEvent) {

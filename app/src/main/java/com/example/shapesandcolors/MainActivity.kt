@@ -16,9 +16,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         circle_menu.setMainMenu(Color.parseColor("#A2E3DD"), R.drawable.play, R.drawable.stop)
-            .addSubMenu(Color.parseColor("#A2E3DD"), R.drawable.main_menu_3d)
+            .addSubMenu(Color.parseColor("#FFB49D"), R.drawable.main_menu_ar)
             .addSubMenu(Color.parseColor("#F4D849"), R.drawable.main_menu_game)
-            .addSubMenu(Color.parseColor("#FFB49D"), R.drawable.main_menu_sensor)
+            .addSubMenu(Color.parseColor("#A2E3DD"), R.drawable.main_menu_sensor3)
             .setOnMenuSelectedListener {
                 when(actList[it]) {
                     "Ar" -> {
