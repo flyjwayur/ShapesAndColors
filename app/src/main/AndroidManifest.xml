@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-feature android:name="android.hardware.camera.ar" />
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.STORAGE" />
@@ -17,8 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ShapeAndColorMDTheme">
-        <activity android:name=".game.FetchImageDetailActivity"></activity>
-        <activity android:name=".MediaInputActivity"></activity>
+
+        <activity android:name=".game.FetchImageDetailActivity" />
+        <activity android:name=".MediaInputActivity" />
         <activity android:name=".ArActivity" />
         <activity android:name=".game.FetchImageActivity" />
         <activity android:name=".PlayActivity" />
@@ -29,6 +32,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.shapesandcolors.brapp1"/>
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.google.ar.core"
