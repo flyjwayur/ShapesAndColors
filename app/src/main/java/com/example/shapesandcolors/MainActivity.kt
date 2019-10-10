@@ -4,10 +4,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.shapesandcolors.ar.ArActivity
 import com.example.shapesandcolors.game.FetchImageActivity
+import com.example.shapesandcolors.sensor.PlayActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         circle_menu.setMainMenu(Color.parseColor("#A2E3DD"), R.drawable.play, R.drawable.stop)
             .addSubMenu(Color.parseColor("#FFB49D"), R.drawable.main_menu_ar)
             .addSubMenu(Color.parseColor("#F4D849"), R.drawable.main_menu_game)
-            .addSubMenu(Color.parseColor("#A2E3DD"), R.drawable.main_menu_sensor3)
+            .addSubMenu(Color.parseColor("#A2E3DD"), R.drawable.main_menu_sensor)
             .setOnMenuSelectedListener {
                 when(actList[it]) {
                     "Ar" -> {
-                        val intent = Intent(this, ArActivity :: class.java)
+                        val intent = Intent(this, ArActivity:: class.java)
                         startActivity(intent)
                     }
                     "FetchImage" -> {
@@ -36,13 +39,13 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     "Play" -> {
-                        val intent = Intent(this, PlayActivity :: class.java)
+                        val intent = Intent(this, PlayActivity:: class.java)
                         startActivity(intent)
                     }
                 }
             }
 
-        //addReceiver()
+        addReceiver()
 
         button_ReceiverOn.setOnClickListener {
             var intent = Intent(this, MyReceiver::class.java)
@@ -57,6 +60,12 @@ class MainActivity : AppCompatActivity() {
 
         brapp1 = MyReceiver()
         var filter = IntentFilter("com.example.shapesandcolors.brapp1")
+        registerReceiver(brapp1, filter)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        var filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         registerReceiver(brapp1, filter)
     }
 

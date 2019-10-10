@@ -8,9 +8,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.shapesandcolors.game.FetchImageActivity
 import com.example.shapesandcolors.game.gameModel.GameViewModel
-import kotlinx.android.synthetic.main.activity_fetch_image.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -39,7 +38,6 @@ class ColorGameDialogFrag : DialogFragment() {
             var fetch_image_activity = activity as FetchImageActivity
             when(which){
                 DialogInterface.BUTTON_POSITIVE -> {
-//                    fetch_image_activity.textV_colorGameDesc2.text = "Awesome! Let's find a color of the image"
 
                     viewModel.shuffleImage()
                     fetch_image_activity.updateImage()

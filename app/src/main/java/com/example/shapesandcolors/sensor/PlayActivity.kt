@@ -1,8 +1,7 @@
-package com.example.shapesandcolors
+package com.example.shapesandcolors.sensor
 
 import android.content.Context
 import android.content.pm.ActivityInfo
-import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -10,6 +9,7 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.shapesandcolors.R
 import kotlinx.android.synthetic.main.activity_play.*
 
 class PlayActivity : AppCompatActivity(), SensorEventListener {

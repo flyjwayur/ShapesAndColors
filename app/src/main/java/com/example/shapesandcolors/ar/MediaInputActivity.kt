@@ -1,13 +1,12 @@
-package com.example.shapesandcolors
+package com.example.shapesandcolors.ar
 
-import android.app.PendingIntent.getActivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.View
+import com.example.shapesandcolors.R
 import kotlinx.android.synthetic.main.activity_media_input.*
-import kotlinx.android.synthetic.main.activity_media_input.view.*
 import org.jetbrains.anko.toast
 import java.io.File
 import java.io.FileInputStream
