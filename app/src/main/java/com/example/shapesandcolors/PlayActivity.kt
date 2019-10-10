@@ -32,7 +32,7 @@ class PlayActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun getAccelerometer(event: SensorEvent) {
-        // Movement
+        // Movement parameters displayed to screen
         val xVal = event.values[0]
         val yVal = event.values[1]
         val zVal = event.values[2]
@@ -42,6 +42,7 @@ class PlayActivity : AppCompatActivity(), SensorEventListener {
 
         val accelerationSquareRoot = (xVal * xVal + yVal * yVal + zVal * zVal) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH)
 
+        // logic that swaps two different colors upon detected movement
         if (accelerationSquareRoot >= 3) {
             if (color) {
                 relative.setBackgroundColor(getResources().getColor(R.color.aqua))

@@ -39,6 +39,7 @@ class MediaInputActivity : AppCompatActivity() {
         }
         recordTheVoice = RecordAudio(this, this, audioFile)
 
+        // play audio file if it exists
         playBtn.setOnClickListener {
             try {
                 val inputStream = FileInputStream(audioFile)
@@ -78,6 +79,7 @@ class MediaInputActivity : AppCompatActivity() {
                 val txtfile = File(dir, textFILE)
                 val inputText = textInputEditText.text
                 if(inputText!!.isNotBlank()) {
+                    // checks that we get atleast 3 characters for the name before writing file
                     if (inputText.length >= 3) {
                         txtfile.writeText("$inputText")
                         toast("Save successful!")

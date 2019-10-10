@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // a circular animation for launching different activities
         circle_menu.setMainMenu(Color.parseColor("#CDCDCD"), R.drawable.play, R.drawable.stop)
             .addSubMenu(Color.parseColor("#25BCFE"), R.drawable.icon_stop)
             .addSubMenu(Color.parseColor("#6D4C41"), R.drawable.sound)

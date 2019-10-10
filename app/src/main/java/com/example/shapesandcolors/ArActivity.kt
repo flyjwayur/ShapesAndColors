@@ -26,9 +26,6 @@ import java.io.IOException
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 
-
-
-
 class ArActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var file: File
@@ -38,7 +35,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
     private var mPlayer: MediaPlayer? = null
 
     private var label: String? = null
-    private val defaultShapeName = "Tap to name"
+    private val defaultShapeName = "Tap to name" // render model text label
     private val audioList = listOf("circle.raw", "diamond.raw", "heart.raw", "hexagon.raw", "octagon.raw",
         "oval.raw", "rectangle.raw", "square.raw", "star.raw", "triangle.raw")
     private val textFileList = listOf("circle.txt", "diamond.txt", "heart.txt", "hexagon.txt", "octagon.txt",
@@ -64,11 +61,14 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
             fragment = getSupportFragmentManager().getFragment(savedInstanceState, "arFragment") as ArFragment
         }
 
+        // Array of 2d images
         arrayView = arrayOf(
             imv_circle, imv_diamond, imv_heart, imv_hexagon, imv_octagon,
             imv_oval, imv_rectangle, imv_square, imv_star, imv_triangle)
 
+        // Click listener for the 2d images
         setUpClickListener()
+        // Set up the 3d models
         setUpModel()
 
 
@@ -96,12 +96,12 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // Click listener for each 2D image
     override fun onClick(view: View?) {
         when (view!!.id) {
             R.id.imv_circle -> {
                 selected = 1
                 myBackground(view.id)
-                // Toast.makeText(this, "Image $selected", Toast.LENGTH_SHORT).show()
             }
             R.id.imv_diamond -> {
                 selected = 2
@@ -142,6 +142,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // Active 2D image gets some highlight color
     private fun myBackground(myid: Int) {
         for (i in arrayView.indices) {
             if (arrayView[i].id == myid) {
@@ -152,6 +153,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // Assign the model variables to actual models
     private fun setUpModel() {
         ModelRenderable.builder()
             .setSource(this, Uri.parse("Circle.sfb"))
@@ -195,6 +197,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
             .thenAccept{ triangleRenderable = it }
     }
 
+    // Create a model & render in the scene based on the 2D image clicked
     private fun createModel(anchorNode: AnchorNode, selected: Int) {
         when(selected) {
             1 -> {
@@ -301,6 +304,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // Create floating interactive labels above the model for name, audio and deletion from scene
     private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, audiofile: String, id : Int) {
 
         ViewRenderable.builder().setView(this, R.layout.label_layout)
@@ -318,6 +322,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 val index = id - 1
                 val textFILE = textFileList[index]
 
+                // read model label from storage if it exists
                 if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
                     try {
                         val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
@@ -325,10 +330,10 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                         textLabel.text = txtfile.readText()
                     } catch (ex: IOException) {
                         textLabel.text = defaultShapeName
-                        Log.d("ReadText", ex.toString())
                     }
                 }
 
+                // Launch the activity responsible for collecting model info
                 textLabel.setOnClickListener{
                     val intent = Intent(this, MediaInputActivity::class.java)
                     intent.putExtra("shapeSoundName", audiofile)
@@ -346,7 +351,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 val playLabel = viewRenderable.view as Button
 
-                // Audio resource values
+                // Audio resource values from storage if available
                 playLabel.setOnClickListener {
                     val index = id - 1
                     val recFileName = audioList[index]
@@ -378,6 +383,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
                 val deleteLabel = viewRenderable.view as Button
 
+                // delete the model from the scene
                 deleteLabel.setOnClickListener {
                     anchorNode.setParent(null)
                 }
@@ -406,6 +412,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                             prepare()
                             start()
                         }
+                        // release the media player once play completes
                         mPlayer!!.setOnCompletionListener {
                             mPlayer!!.release()
                             mPlayer = null
