@@ -1,6 +1,7 @@
 package com.example.shapesandcolors
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.media.AudioManager
 import android.media.MediaPlayer
@@ -60,6 +61,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_ar)
 
         if (savedInstanceState != null) {

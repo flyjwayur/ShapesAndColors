@@ -1,6 +1,7 @@
 package com.example.shapesandcolors
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -27,6 +28,7 @@ class PlayActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_play)
 
         sManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
