@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -59,6 +60,12 @@ class MainActivity : AppCompatActivity() {
 
         brapp1 = MyReceiver()
         var filter = IntentFilter("com.example.shapesandcolors.brapp1")
+        registerReceiver(brapp1, filter)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        var filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         registerReceiver(brapp1, filter)
     }
 
