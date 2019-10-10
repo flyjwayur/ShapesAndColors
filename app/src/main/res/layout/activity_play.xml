@@ -8,11 +8,47 @@
     android:layout_height="match_parent"
     tools:context=".PlayActivity">
 
+    <Button
+        android:id="@+id/button_goBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_sensor_desc"
+        android:textColor="@color/colorDarkGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075" />
+
+    <TextView
+        android:id="@+id/textView_sensor_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="50sp"
+        android:background="@color/colorPastelYellow"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:padding="30sp"
+        android:paddingBottom="50dp"
+        android:text="@string/sensor_desc"
+        android:textAlignment="textStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_X"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/tv_X"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginTop="70sp"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/x_axis"
@@ -30,7 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_X"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="70sp"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/y_axis"
@@ -46,7 +83,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_Y"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="70sp"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/z_axis"
@@ -56,5 +94,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_Y" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="80dp"
+        android:layout_height="75dp"
+        android:rotationX="30"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_sensor_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.867"
+        app:layout_constraintStart_toStartOf="@+id/textView_sensor_desc"
+        app:layout_constraintTop_toTopOf="@+id/textView_sensor_desc"
+        app:layout_constraintVertical_bias="0.864"
+        app:srcCompat="@drawable/icon_tilt_phone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
