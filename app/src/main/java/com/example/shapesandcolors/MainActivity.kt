@@ -1,6 +1,7 @@
 package com.example.shapesandcolors
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,12 +14,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main)
 
-        circle_menu.setMainMenu(Color.parseColor("#CDCDCD"), R.drawable.play, R.drawable.stop)
-            .addSubMenu(Color.parseColor("#25BCFE"), R.drawable.icon_stop)
-            .addSubMenu(Color.parseColor("#6D4C41"), R.drawable.sound)
-            .addSubMenu(Color.parseColor("#1a237e"), R.drawable.sound2)
+        circle_menu.setMainMenu(Color.parseColor("#A2E3DD"), R.drawable.play, R.drawable.stop)
+            .addSubMenu(Color.parseColor("#FFB49D"), R.drawable.main_menu_ar)
+            .addSubMenu(Color.parseColor("#F4D849"), R.drawable.main_menu_game)
+            .addSubMenu(Color.parseColor("#A2E3DD"), R.drawable.main_menu_sensor3)
             .setOnMenuSelectedListener {
                 when(actList[it]) {
                     "Ar" -> {

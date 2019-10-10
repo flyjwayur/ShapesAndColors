@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="ShapeAndColorTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ShapeAndColorMDTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPastelYellow</item>
         <item name="colorPrimaryDark">@color/colorPastelBlue</item>

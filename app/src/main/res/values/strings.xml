@@ -13,4 +13,9 @@
     <string name="y_axis">Y-Axis</string>
     <string name="z_axis">Z-Axis</string>
     <string name="x_axis">X-Axis</string>
+    <string name="home">Home</string>
+    <string name="shapes_colors"><![CDATA[Shapes & Colors]]></string>
+    <string name="main_menu_desc">It is a main menu. Hovering it will bring three sub menus. The sub menu includes AR, Game, Sensor page.
+    AR menu is on the top, Game menu is on the bottom right, Sensor menu is on the bottom left from the main menu</string>
+    <string name="sensor_desc">Would you like to try \'Tilt the phone\'? \nLet\'s see what is changing :D</string>
 </resources>
