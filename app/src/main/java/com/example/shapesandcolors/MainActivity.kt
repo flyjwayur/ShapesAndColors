@@ -1,8 +1,10 @@
 package com.example.shapesandcolors
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.shapesandcolors.game.FetchImageActivity
@@ -11,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private var actList = arrayOf("Ar", "FetchImage", "Play")
+
+    var brapp1:MyReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,5 +42,30 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+        //addReceiver()
+
+        button_ReceiverOn.setOnClickListener {
+            var intent = Intent(this, MyReceiver::class.java)
+            sendBroadcast(intent)
+        }
     }
+
+    fun addReceiver(){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+            return
+        }
+
+        brapp1 = MyReceiver()
+        var filter = IntentFilter("com.example.shapesandcolors.brapp1")
+        registerReceiver(brapp1, filter)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(brapp1 != null){
+            unregisterReceiver(brapp1)
+            brapp1 = null
+        }
+    }
+
 }
