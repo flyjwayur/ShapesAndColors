@@ -14,4 +14,5 @@
     <string name="z_axis">Z-Axis</string>
     <string name="x_axis">X-Axis</string>
     <string name="home">Home</string>
+    <string name="shapes_colors"><![CDATA[Shapes & Colors]]></string>
 </resources>

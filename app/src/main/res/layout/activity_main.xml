@@ -6,9 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.hitomi.cmlibrary.CircleMenu
-        android:id="@+id/circle_menu"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPastelBlue">
+
+        <TextView
+            android:id="@+id/textView_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100sp"
+            android:background="@color/colorPastelYellow"
+            android:padding="30sp"
+            android:text="@string/shapes_colors"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
+            android:textColor="@color/colorDarkGrey"
+            android:textStyle="bold" />
+
+        <com.hitomi.cmlibrary.CircleMenu
+            android:id="@+id/circle_menu"
+            android:layout_width="match_parent"
+            android:layout_height="400sp"
+            android:layout_gravity="top"
+            android:padding="10sp" />
+    </LinearLayout>
 
 </FrameLayout>
