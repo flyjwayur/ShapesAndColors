@@ -21,7 +21,6 @@ class RecordAudio(val context: Context, val activity: MediaInputActivity, var re
         }
 
         try{
-
             val outputStream = FileOutputStream(recFile)
             val bufferedOutputStream = BufferedOutputStream(outputStream)
             val dataOutputStream = DataOutputStream(bufferedOutputStream)

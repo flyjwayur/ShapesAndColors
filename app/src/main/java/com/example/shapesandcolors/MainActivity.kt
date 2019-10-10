@@ -2,12 +2,9 @@ package com.example.shapesandcolors
 
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import com.google.ar.sceneform.rendering.ModelRenderable
-import com.google.ar.sceneform.ux.ArFragment
+import com.example.shapesandcolors.game.FetchImageActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     "FetchImage" -> {
-                        val intent = Intent(this, FetchImageActivity :: class.java)
+                        val intent = Intent(this, FetchImageActivity:: class.java)
                         startActivity(intent)
                     }
                     "Play" -> {

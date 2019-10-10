@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-feature android:name="android.hardware.camera.ar" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -21,7 +24,7 @@
         <activity android:name=".MediaInputActivity"></activity>
         <activity android:name=".FetchImageDetailActivity"></activity>
         <activity android:name=".ArActivity" />
-        <activity android:name=".FetchImageActivity" />
+        <activity android:name=".game.FetchImageActivity" />
         <activity android:name=".PlayActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

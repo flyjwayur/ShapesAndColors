@@ -30,11 +30,13 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var file: File
     lateinit var arrayView : Array<View>
+
     private var selected = 1 // chosen renderable by default
     private lateinit var fragment: ArFragment
     private var mPlayer: MediaPlayer? = null
 
     private var label: String? = null
+
     private val defaultShapeName = "Tap to name" // render model text label
     private val audioList = listOf("circle.raw", "diamond.raw", "heart.raw", "hexagon.raw", "octagon.raw",
         "oval.raw", "rectangle.raw", "square.raw", "star.raw", "triangle.raw")
@@ -158,48 +160,48 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
         ModelRenderable.builder()
             .setSource(this, Uri.parse("Circle.sfb"))
             .build()
-            .thenAccept{ circleRenderable = it }
+            .thenAccept { circleRenderable = it }
         ModelRenderable.builder()
             .setSource(this, Uri.parse("diamond.sfb"))
             .build()
-            .thenAccept{ diamondRenderable = it }
+            .thenAccept { diamondRenderable = it }
         ModelRenderable.builder()
             .setSource(this, Uri.parse("heart.sfb"))
             .build()
-            .thenAccept{ heartRenderable = it }
+            .thenAccept { heartRenderable = it }
         ModelRenderable.builder()
             .setSource(this, Uri.parse("hexagon.sfb"))
             .build()
-            .thenAccept{ hexagonRenderable = it }
+            .thenAccept { hexagonRenderable = it }
         ModelRenderable.builder()
             .setSource(this, Uri.parse("octagon.sfb"))
             .build()
-            .thenAccept{ octagonRenderable = it }
+            .thenAccept { octagonRenderable = it }
         ModelRenderable.builder()
             .setSource(this, Uri.parse("oval.sfb"))
             .build()
-            .thenAccept{ ovalRenderable = it }
+            .thenAccept { ovalRenderable = it }
         ModelRenderable.builder()
             .setSource(this, Uri.parse("rectangle.sfb"))
             .build()
-            .thenAccept{ rectangleRenderable = it }
+            .thenAccept { rectangleRenderable = it }
         ModelRenderable.builder()
             .setSource(this, Uri.parse("square.sfb"))
             .build()
-            .thenAccept{ squareRenderable = it }
+            .thenAccept { squareRenderable = it }
         ModelRenderable.builder()
             .setSource(this, Uri.parse("star.sfb"))
             .build()
-            .thenAccept{ starRenderable = it }
+            .thenAccept { starRenderable = it }
         ModelRenderable.builder()
             .setSource(this, Uri.parse("triangle.sfb"))
             .build()
-            .thenAccept{ triangleRenderable = it }
+            .thenAccept { triangleRenderable = it }
     }
 
     // Create a model & render in the scene based on the 2D image clicked
     private fun createModel(anchorNode: AnchorNode, selected: Int) {
-        when(selected) {
+        when (selected) {
             1 -> {
                 val circle = TransformableNode(fragment.transformationSystem)
                 circle.scaleController.maxScale = 0.3f
@@ -305,7 +307,12 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     // Create floating interactive labels above the model for name, audio and deletion from scene
-    private fun addShapeLabel(anchorNode: AnchorNode, node: TransformableNode, audiofile: String, id : Int) {
+    private fun addShapeLabel(
+        anchorNode: AnchorNode,
+        node: TransformableNode,
+        audiofile: String,
+        id: Int
+    ) {
 
         ViewRenderable.builder().setView(this, R.layout.label_layout)
             .build()
@@ -317,6 +324,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 labelView.select()
 
                 val textLabel = viewRenderable.view as TextView
+                    textLabel.text = label // set's the text according to the label parsed
 
                 // Label text resource
                 val index = id - 1
@@ -334,7 +342,7 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
                 // Launch the activity responsible for collecting model info
-                textLabel.setOnClickListener{
+                textLabel.setOnClickListener {
                     val intent = Intent(this, MediaInputActivity::class.java)
                     intent.putExtra("shapeSoundName", audiofile)
                     startActivity(intent)
@@ -344,13 +352,13 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
             .build()
             .thenAccept { viewRenderable ->
                 val labelView = TransformableNode(fragment.transformationSystem)
-                labelView.localPosition = Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.7f, 0f)
+                labelView.localPosition =
+                    Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.7f, 0f)
                 labelView.setParent(anchorNode)
                 labelView.renderable = viewRenderable
                 labelView.select()
 
                 val playLabel = viewRenderable.view as Button
-
                 // Audio resource values from storage if available
                 playLabel.setOnClickListener {
                     val index = id - 1
@@ -376,7 +384,8 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
             .build()
             .thenAccept { viewRenderable ->
                 val labelView = TransformableNode(fragment.transformationSystem)
-                labelView.localPosition = Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.25f, 0f)
+                labelView.localPosition =
+                    Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.25f, 0f)
                 labelView.setParent(anchorNode)
                 labelView.renderable = viewRenderable
                 labelView.select()
@@ -392,13 +401,14 @@ class ArActivity : AppCompatActivity(), View.OnClickListener {
             .build()
             .thenAccept { viewRenderable ->
                 val labelView = TransformableNode(fragment.transformationSystem)
-                labelView.localPosition = Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.475f, 0f)
+
+                labelView.localPosition =
+                    Vector3(node.localPosition.x - 0.5f, node.localPosition.y + 0.475f, 0f)
                 labelView.setParent(anchorNode)
                 labelView.renderable = viewRenderable
                 labelView.select()
 
                 val checkLabel = viewRenderable.view as Button
-
                 // Audio for correct shape and color
                 checkLabel.setOnClickListener {
                     val index = id - 1

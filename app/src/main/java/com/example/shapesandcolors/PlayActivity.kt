@@ -40,14 +40,14 @@ class PlayActivity : AppCompatActivity(), SensorEventListener {
         tv_Y.text = "Y Value: ".plus(yVal.toString())
         tv_Z.text = "Z Value: ".plus(zVal.toString())
 
-        val accelerationSquareRoot = (xVal * xVal + yVal * yVal + zVal * zVal) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH)
+        val accelerationSquareRoot =
+            (xVal * xVal + yVal * yVal + zVal * zVal) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH)
 
-        // logic that swaps two different colors upon detected movement
         if (accelerationSquareRoot >= 3) {
             if (color) {
-                relative.setBackgroundColor(getResources().getColor(R.color.aqua))
+                relative.setBackgroundColor(resources.getColor(R.color.aqua))
             } else {
-                relative.setBackgroundColor(getResources().getColor((R.color.orange)))
+                relative.setBackgroundColor(resources.getColor((R.color.orange)))
             }
             color = !color
         }
@@ -55,9 +55,11 @@ class PlayActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume() {
         super.onResume()
-        sManager!!.registerListener(this,
+        sManager!!.registerListener(
+            this,
             sManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-            SensorManager.SENSOR_DELAY_NORMAL)
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
     }
 
     override fun onPause() {
