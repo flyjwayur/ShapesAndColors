@@ -38,7 +38,6 @@ class ColorGameDialogFrag : DialogFragment() {
             var fetch_image_activity = activity as FetchImageActivity
             when(which){
                 DialogInterface.BUTTON_POSITIVE -> {
-//                    fetch_image_activity.textV_colorGameDesc2.text = "Awesome! Let's find a color of the image"
 
                     viewModel.shuffleImage()
                     fetch_image_activity.updateImage()
