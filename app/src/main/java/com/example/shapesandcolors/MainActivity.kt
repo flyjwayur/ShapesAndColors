@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         circle_menu.setMainMenu(Color.parseColor("#A2E3DD"), R.drawable.play, R.drawable.stop)
             .addSubMenu(Color.parseColor("#FFB49D"), R.drawable.main_menu_ar)
             .addSubMenu(Color.parseColor("#F4D849"), R.drawable.main_menu_game)
-            .addSubMenu(Color.parseColor("#A2E3DD"), R.drawable.main_menu_sensor3)
+            .addSubMenu(Color.parseColor("#A2E3DD"), R.drawable.main_menu_sensor)
             .setOnMenuSelectedListener {
                 when(actList[it]) {
                     "Ar" -> {
