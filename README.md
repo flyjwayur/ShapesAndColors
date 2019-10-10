@@ -1,7 +1,7 @@
 # ShapesAndColors
-An enducational app for kids to learn shapes and colors :)
+An educational app for kids to learn shapes and colors in a playful way :)
 
-It can be used as a tool to help kids to learn shapes and colors by a parent. 
+It can be used as an interactive tool to help kids to learn shapes and colors by a parent. 
 It includes AR, game and sensor page.
 
 ## Main features 
