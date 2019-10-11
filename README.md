@@ -9,6 +9,9 @@ It includes AR, game and sensor page.
 - Game : Playing a color matching game (matching colors between an object in an image and input from color palette),
 Giving a feedback on the answer and score on the answer
 - Sensor : The backgound color of page is changing, when a user tilt a phone.
+- Theme : Material design + 3 main colors (Primary color : pastel yellow, Secondary color : pastel blue, accent : dark pink)
+- Accessibility : improvment on color contrasts and providing content descriptions on images 
+- Broadcast Receiver : Toast message about the internet connectivity & ready to send messages to/from other app
 
 ## Built With
 - Android ARCore & sceneform
@@ -47,6 +50,6 @@ Copyright 2016 Hitomis, Inc.
   See the License for the specific language governing permissions and
   limitations under the License.
 
-
+3D and 2D assets are drawn by Benard. 
 Except Hitomis CircleMenu in our project, it is an opensource :D 
 
