@@ -22,8 +22,7 @@
                 android:id="@+id/button_goBackHome"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
-                android:text="@string/home"
-                android:textColor="@color/colorDarkGrey"/>
+                android:text="@string/home"/>
 
             <TextView
                 android:id="@+id/textV_colorGameDesc2"
@@ -100,7 +99,6 @@
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/color_check"
-                    android:textColor="@color/colorDarkGrey"
                     app:layout_constraintBottom_toBottomOf="@+id/recyclerV_colors_grid"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"

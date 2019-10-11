@@ -12,6 +12,6 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPastelYellow</item>
         <item name="colorPrimaryDark">@color/colorPastelBlue</item>
-        <item name="colorAccent">@color/colorPastelPink</item>
+        <item name="colorAccent">@color/colorDarkPink</item>
     </style>
 </resources>
